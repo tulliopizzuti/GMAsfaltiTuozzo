@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.asfalti.javabean.MagazzinoBean;
+
 /**
  * Servlet implementation class PageComposer
  */
@@ -27,12 +29,22 @@ public class PageComposer extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
+		MagazzinoBean user=(MagazzinoBean)session.getAttribute("user");
 		String page=request.getParameter("responsepage");
 		
 		if(page==null)
 			page="login";
-		
-		
+		if(user!=null){
+			if(user.getTipo().equals("mag")){
+				if(page.equals("disp")){
+					getServletContext().getRequestDispatcher("/getdisp?id="+user.getIdM()).include(request, response);
+				}
+			
+			}
+			if(user.getTipo().equals("admin")){
+							
+			}
+		}
 		
 		
 		
