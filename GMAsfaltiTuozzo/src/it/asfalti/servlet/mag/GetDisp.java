@@ -1,4 +1,4 @@
-package it.asfalti.pagecomposer;
+package it.asfalti.servlet.mag;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,41 +6,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class PageComposer
+ * Servlet implementation class GetDisp
  */
-@WebServlet("/pagecomposer")
-public class PageComposer extends HttpServlet {
+@WebServlet("/getDisp")
+public class GetDisp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PageComposer() {
+    public GetDisp() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
-		String page=request.getParameter("responsepage");
-		
-		if(page==null)
-			page="login";
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		getServletContext().getRequestDispatcher("/"+page+".jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

@@ -6,7 +6,7 @@
 	String error=(String)session.getAttribute("error");
 	MagazzinoBean user=(MagazzinoBean)session.getAttribute("user");
 	if(user!=null)
-		response.sendRedirect("pagecomposer="+user.getTipo()+"page.jsp");
+		response.sendRedirect("pagecomposer?responsepage="+user.getTipo()+"page");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

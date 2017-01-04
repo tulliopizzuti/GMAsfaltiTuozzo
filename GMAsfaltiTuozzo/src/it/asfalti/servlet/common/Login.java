@@ -47,6 +47,7 @@ public class Login extends HttpServlet {
 		if(username!=null && password!=null){
 			try {
 				checkLogin(username, password);
+				System.out.println(user.getIdM());
 				request.getSession().setAttribute("user", user);
 				request.getSession().removeAttribute("error");
 				String tipo=user.getTipo();
@@ -60,7 +61,9 @@ public class Login extends HttpServlet {
 	}
 	private void checkLogin (String username, String password) throws Exception{
 		if((user=information.checkLogin(username, password))==null){
+
 			throw new Exception("Login fallito");
+			
 		}
 	}
 }
