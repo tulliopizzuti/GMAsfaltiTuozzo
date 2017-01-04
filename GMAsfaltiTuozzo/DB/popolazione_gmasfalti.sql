@@ -1,8 +1,8 @@
-insert into magazzino values ("admin0","Amministratore del sistema",""," "," "," ","admin");
-insert into magazzino values ("fornit","Fornitore generico a cui intestare carichi non provenienti da altri magazzini", " "," ", " ", " ","fornit");
-insert into magazzino values ("mag001","Magazzino numero 1","Roma", "Via Napoli","00060","125","mag0001");
-insert into magazzino values ("mag002","Magazzino numero 2","Milano", "Via Roma","00080","120","mag0002");
-insert into magazzino values ("mag003","Magazzino numero 3","Napoli", "Via Milano","00040","130","mag0003");
+insert into magazzino values ("admin0","Amministratore del sistema",""," "," "," ","admin",'admin');
+insert into magazzino values ("fornit","Fornitore generico a cui intestare carichi non provenienti da altri magazzini", " "," ", " ", " ","fornit",'mag');
+insert into magazzino values ("mag001","Magazzino numero 1","Roma", "Via Napoli","00060","125","mag0001",'mag');
+insert into magazzino values ("mag002","Magazzino numero 2","Milano", "Via Roma","00080","120","mag0002",'mag');
+insert into magazzino values ("mag003","Magazzino numero 3","Napoli", "Via Milano","00040","130","mag0003",'mag');
 
 
 insert into prodotto values("PA33003",4,"Cartongesso normale 120x300");

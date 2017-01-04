@@ -10,7 +10,7 @@ create database gmasfalti;
 		cap varchar(5) not null,
 		nCivico varchar(3) not null,
 		passwordM varchar(25) not null,
-		
+		tipo enum('admin','mag') not null default 'mag',
 		primary key(idM)
 		);
 
@@ -59,7 +59,7 @@ create database gmasfalti;
 		idOperazione int unsigned auto_increment,
 		idM char(6) not null,
 		tipo enum('Carico','Scarico') not null,
-		stato enum('Elaborazione','Spedita','Consegnata')
+		stato enum('Elaborazione','Spedita','Consegnata'),
 		data datetime not null,
 		da_a char(6) not null,
 		

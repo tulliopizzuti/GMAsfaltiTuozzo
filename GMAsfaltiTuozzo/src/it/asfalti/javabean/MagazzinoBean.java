@@ -8,8 +8,9 @@ public class MagazzinoBean {
     private String cap;
     private String nCivico;
     private String password;
+    private String tipo;
 
-    public MagazzinoBean(String idM, String descrizione, String citta, String via, String cap, String nCivico, String password) {
+    public MagazzinoBean(String idM, String descrizione, String citta, String via, String cap, String nCivico, String password,String tipo) {
         this.idM = idM;
         this.descrizione = descrizione;
         this.citta = citta;
@@ -17,9 +18,18 @@ public class MagazzinoBean {
         this.cap = cap;
         this.nCivico = nCivico;
         this.password = password;
+        this.tipo=tipo;
     }
 
-    public String getIdM() {
+    public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getIdM() {
         return this.idM;
     }
 
