@@ -1,7 +1,7 @@
 <%@page import="it.asfalti.javabean.MagazzinoBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ import="it.asfalti.javabean.MagazzinoBean" %>   
+<%@page import="it.asfalti.javabean.MagazzinoBean" %>   
 <%
 	String error=(String)session.getAttribute("error");
 	MagazzinoBean user=(MagazzinoBean)session.getAttribute("user");
