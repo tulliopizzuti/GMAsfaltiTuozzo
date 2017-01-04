@@ -48,6 +48,7 @@ public class Login extends HttpServlet {
 			try {
 				checkLogin(username, password);
 				request.getSession().setAttribute("user", user);
+				request.getSession().removeAttribute("error");
 				String tipo=user.getTipo();
 				redirectedPage="pagecomposer?responsepage="+tipo+"page";
 			} catch (Exception e) {
