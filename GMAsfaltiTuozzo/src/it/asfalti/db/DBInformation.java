@@ -3,6 +3,7 @@ package it.asfalti.db;
 
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -196,13 +197,14 @@ public class DBInformation implements GetInformation {
 		String ultimaOp="select max(idOperazione) as max from operazionicompletate;";
 		String registraComp="insert into composizioneOpCompl values(?,?,?);";
 		Connection connection=null;
+		Date data=new Date(System.currentTimeMillis());
 		try{
 			connection=DriverManagerConnectionPool.getConnection();
 			PreparedStatement ps=connection.prepareStatement(registraOp);
 			ps.setString(1, op.getIdM());
-			ps.setString(2, op.getTipo());
-			ps.setDate(3, op.getData());
-			ps.setString(4, op.getDa_a());
+			ps.setString(2, "Scarico");
+			ps.setDate(3, data);
+			ps.setString(4, "client");
 			ps.executeUpdate();
 			ps=connection.prepareStatement(ultimaOp);
 			ResultSet rs =ps.executeQuery();

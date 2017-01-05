@@ -34,6 +34,7 @@
 		</nav>
 		<div id="dynamiccontent">
 			<%if(disp!=null && disp.size()>0){ %>
+			
 				<table>
 					<caption>Disponibilità prodotti del magazzino</caption>
 					<tr> 
@@ -43,15 +44,23 @@
 						<th>Unità di misura </th>
 					</tr>
 					<%for(DisponibilitaBean d:disp){ %>
+					
 						<tr>
 							<td><%=d.getProd().getId() %> </td>
 							<td><%=d.getProd().getDescrizione()%>  </td>
 							<td><%=d.getQ() %>  </td>
 							<td><%=d.getProd().getMisura()%>  </td>
+							<td> 
+								<input class="inputNumber" name=<%=d.getProd().getId()%> min=0 max=<%=d.getQ()%> type="number"       />
+							</td>
 						</tr>
 						
+					
 					<%} %>
 				</table>
+				<form method="post" onSubmit="">
+					<input type="submit" value="Completa">
+				</form>
 			<%} else { %>
 				<div id="nulldisp">
 					Non hai disponibilità di prodotti! Devi ordinarli!
@@ -59,5 +68,21 @@
 			<%} %>
 		</div>
 	</div>
+	<script type="text/javascript">
+		var elements=document.getElementsByClassName("inputNumber");
+		var toSend[];
+		for(i=0;i<elements.lenght;i++){
+			if(elements[i].value>0){
+				
+			}
+		}
+	
+	
+	
+	
+	
+	
+	
+	</script>
 </body>
 </html>
