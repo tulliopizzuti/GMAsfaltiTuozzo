@@ -100,8 +100,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public ArrayList<OperazioneCompletataBean> getOperazione(String magID) {
-		ArrayList<OperazioneCompletataBean> op=null;
+	public ArrayList<OperazioneCompletataBean> getOperazioniComp(String magID) {		ArrayList<OperazioneCompletataBean> op=null;
 		Connection connection=null;
 		
 		String selectOp="select * from operazionicompletate where  operazionicompletate.idM=?;";
@@ -158,5 +157,7 @@ public class DBInformation implements GetInformation {
 		}		
 		return op;
 	}
+
+	
 
 }

@@ -39,6 +39,9 @@ public class PageComposer extends HttpServlet {
 				if(page.equals("disp")){
 					getServletContext().getRequestDispatcher("/getdisp?id="+user.getIdM()).include(request, response);
 				}
+				if(page.equals("opconcl")){
+					getServletContext().getRequestDispatcher("/getOpConcl?id="+user.getIdM()).include(request, response);
+				}
 			
 			}
 			if(user.getTipo().equals("admin")){

@@ -9,5 +9,5 @@ import it.asfalti.javabean.OperazioneCompletataBean;
 public interface GetInformation {
 	public MagazzinoBean checkLogin(String username, String password);
 	public ArrayList<DisponibilitaBean> getDisponibilita(String magID);
-	public ArrayList<OperazioneCompletataBean> getOperazione(String magID);
+	public ArrayList<OperazioneCompletataBean> getOperazioniComp(String magID);
 }
