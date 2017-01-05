@@ -158,6 +158,37 @@ public class DBInformation implements GetInformation {
 		return op;
 	}
 
+	@Override
+	public boolean scaricaMerce(String idM, String idP, float q) {
+		Connection connection=null;
+		String sql="update disponibilita set quantita=quantita-? where idM=? and idProduct=?;";
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(sql);
+			ps.setString(2, idM);
+			ps.setFloat(1, q);
+			ps.setString(3, idP);
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+			return false;
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		
+		return true;
+	}
+
 	
 
 }
