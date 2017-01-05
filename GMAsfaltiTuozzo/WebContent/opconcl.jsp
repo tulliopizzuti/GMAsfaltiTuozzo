@@ -17,7 +17,7 @@ it.asfalti.javabean.OperazioneCompletataBean,it.asfalti.javabean.ComposizioneBea
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="style\disp.css" rel="stylesheet" type="text/css">
+<link href="style\opconcl.css" rel="stylesheet" type="text/css">
 <title>Operazioni concluse Magazzino <%=user.getIdM() %></title>
 </head>
 <body>

@@ -3,7 +3,7 @@ package it.asfalti.javabean;
 import it.asfalti.javabean.ComposizioneBean;
 import it.asfalti.javabean.OperazioneCompletataBean;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 public class OperazioneSospesaBean
 extends OperazioneCompletataBean {

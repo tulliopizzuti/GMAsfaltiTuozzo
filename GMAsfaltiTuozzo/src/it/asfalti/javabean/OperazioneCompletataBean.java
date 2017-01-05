@@ -1,8 +1,10 @@
 package it.asfalti.javabean;
 
 import it.asfalti.javabean.ComposizioneBean;
+
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class OperazioneCompletataBean {
     private String idOp;

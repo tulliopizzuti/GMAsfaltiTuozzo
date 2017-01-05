@@ -161,7 +161,8 @@ public class DBInformation implements GetInformation {
 	@Override
 	public boolean scaricaMerce(String idM, String idP, float q) {
 		Connection connection=null;
-		String sql="update disponibilita set quantita=quantita-? where idM=? and idProduct=?;";
+		String sql="update disponibilita set quantita=quantita-? "
+				+ "where idM=? and idProduct=?;";
 		try{
 			connection=DriverManagerConnectionPool.getConnection();
 			PreparedStatement ps=connection.prepareStatement(sql);
@@ -185,6 +186,67 @@ public class DBInformation implements GetInformation {
 				System.out.println("SQLError: "+e.getMessage());
 			}
 		}		
+		
+		return true;
+	}
+
+	@Override
+	public boolean registraScarico(OperazioneCompletataBean op) {
+		String registraOp= "insert into operazioniCompletate(idM,tipo,data,da_a) values (?,?,?,?); ";
+		String ultimaOp="select max(idOperazione) as max from operazionicompletate;";
+		String registraComp="insert into composizioneOpCompl values(?,?,?);";
+		Connection connection=null;
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(registraOp);
+			ps.setString(1, op.getIdM());
+			ps.setString(2, op.getTipo());
+			ps.setDate(3, op.getData());
+			ps.setString(4, op.getDa_a());
+			ps.executeUpdate();
+			ps=connection.prepareStatement(ultimaOp);
+			ResultSet rs =ps.executeQuery();
+			Integer max=null;
+			if(rs!=null && rs.next())
+				max=rs.getInt("max");
+			ArrayList<ComposizioneBean> composizione=op.getListaProdotti();
+			for(ComposizioneBean c:composizione){
+				ps=connection.prepareStatement(registraComp);
+				ps.setInt(1,max);
+				ps.setString(2, c.getProdotto().getId());
+				ps.setFloat(3, c.getQuantita());
+				ps.executeUpdate();
+				scaricaMerce( op.getIdM(), 
+						c.getProdotto().getId(), 
+						c.getQuantita());
+			}
+			connection.commit();
+			ps.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+			return false;
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		return true;
 	}

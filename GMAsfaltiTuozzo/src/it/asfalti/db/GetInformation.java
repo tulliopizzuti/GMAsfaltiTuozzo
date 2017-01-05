@@ -11,4 +11,5 @@ public interface GetInformation {
 	public ArrayList<DisponibilitaBean> getDisponibilita(String magID);
 	public ArrayList<OperazioneCompletataBean> getOperazioniComp(String magID);
 	public boolean scaricaMerce(String idM,String idP,float q);
+	public boolean registraScarico(OperazioneCompletataBean op);
 }
