@@ -8,8 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import it.asfalti.javabean.ComposizioneBean;
 import it.asfalti.javabean.DisponibilitaBean;
 import it.asfalti.javabean.MagazzinoBean;
+import it.asfalti.javabean.OperazioneCompletataBean;
 import it.asfalti.javabean.ProdottoBean;
 
 public class DBInformation implements GetInformation {
@@ -95,6 +97,66 @@ public class DBInformation implements GetInformation {
 		
 		
 		return disp;
+	}
+
+	@Override
+	public ArrayList<OperazioneCompletataBean> getOperazione(String magID) {
+		ArrayList<OperazioneCompletataBean> op=null;
+		Connection connection=null;
+		
+		String selectOp="select * from operazionicompletate where  operazionicompletate.idM=?;";
+		String selectComp= "select * from composizioneopcompl,prodotto"
+				+ " where  idOperazione=? and idOperazione=composizioneopcompl.idOperazione "
+				+ "and composizioneopcompl.idProduct=prodotto.idProduct;";
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(selectOp);
+			ps.setString(1, magID);
+			ResultSet rs=ps.executeQuery();
+			if(rs!=null){
+				op=new ArrayList<OperazioneCompletataBean>();
+				while(rs.next()){
+					op.add(new OperazioneCompletataBean(rs.getString("idOperazione"),
+							rs.getString("idM"),
+							rs.getString("tipo"),
+							rs.getDate("data"), 
+							rs.getString("da_a"), 
+							null));
+				}
+			}
+			ps=connection.prepareStatement(selectComp);
+			for(OperazioneCompletataBean operation: op){
+				ps.setString(1, operation.getIdOp());
+				rs=ps.executeQuery();
+				if(rs!=null){
+					ArrayList<ComposizioneBean> comp=new ArrayList<ComposizioneBean>();
+					while(rs.next()){
+					comp.add(new ComposizioneBean(rs.getString("idOperazione"),
+							rs.getFloat("quantita"),
+							new ProdottoBean(rs.getString("idProduct"),
+									rs.getString("descrizioneP"),
+									rs.getString("unitaDiMisura"))));
+					}
+					operation.setListaProdotti(comp);
+				}
+				
+			}
+			rs.close();
+			ps.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		return op;
 	}
 
 }

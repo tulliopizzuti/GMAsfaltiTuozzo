@@ -14,6 +14,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="style\disp.css" rel="stylesheet" type="text/css">
 <title>Disponibilità Magazzino <%=user.getIdM() %></title>
 </head>
 <body>
