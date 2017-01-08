@@ -16,7 +16,7 @@ import it.asfalti.javabean.OperazioneCompletataBean;
 import it.asfalti.javabean.ProdottoBean;
 
 public class DBInformation implements GetInformation {
-
+	
 	@Override
 	public synchronized MagazzinoBean checkLogin(String username, String password) {
 		Connection connection=null;
@@ -224,6 +224,7 @@ public class DBInformation implements GetInformation {
 			}
 			connection.commit();
 			ps.close();
+			cleanDisp(op.getIdM());
 		}
 		catch(SQLException e){
 			System.out.println("SQLError: "+e.getMessage());
@@ -238,19 +239,34 @@ public class DBInformation implements GetInformation {
 				System.out.println("SQLError: "+e.getMessage());
 			}
 		}		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		return true;
+	}
+
+	@Override
+	public void cleanDisp(String idM) {
+		String sql="delete from disponibilita where idM=? and quantita=0";
+		Connection connection=null;
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(sql);
+			ps.setString(1, idM);
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+			
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
 	}
 
 	

@@ -13,8 +13,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="style\scarico.css" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link href="style\scarico.css" rel="stylesheet" type="text/css">
+ 	<script type="text/javascript" src="script\ajax.js"></script>
 <title>Scarica merce Magazzino <%=user.getIdM() %></title>
 </head>
 <body>
@@ -51,16 +52,24 @@
 							<td><%=d.getQ() %>  </td>
 							<td><%=d.getProd().getMisura()%>  </td>
 							<td> 
-								<input class="inputNumber" name=<%=d.getProd().getId()%> min=0 max=<%=d.getQ()%> type="number"       />
+							<%if(d.getProd().getMisura().equals("Pz") || d.getProd().getMisura().equals("Rt")){ %>
+								
+									<input class="inputNumber" name=<%=d.getProd().getId()%> min=0 max=<%=d.getQ()%> type="number"/>
+								
+							<%} else{ %>
+							
+									<input class="inputNumber" step="0.01" name=<%=d.getProd().getId()%> min=0 max=<%=d.getQ()%> type="number" />
+								
+							<%} %>
+							<input type="hidden" value="<%=d.getQ() %>" class="quantity">
 							</td>
 						</tr>
 						
 					
 					<%} %>
 				</table>
-				<form method="post" onSubmit="">
-					<input type="submit" value="Completa">
-				</form>
+					<input type="submit" value="Completa" onClick=send()>
+				
 			<%} else { %>
 				<div id="nulldisp">
 					Non hai disponibilità di prodotti! Devi ordinarli!
@@ -68,21 +77,55 @@
 			<%} %>
 		</div>
 	</div>
-	<script type="text/javascript">
+	
+<script type="text/javascript">
+	
+
+	function send(){
 		var elements=document.getElementsByClassName("inputNumber");
-		var toSend[];
-		for(i=0;i<elements.lenght;i++){
-			if(elements[i].value>0){
-				
-			}
+		var quantity=document.getElementsByClassName("quantity");
+		var error=document.getElementsByClassName("errorInput")
+		for(i=0;i<error.length;i++){
+			error[i].parentNode.removeChild(error[i]);
 		}
-	
-	
-	
-	
-	
-	
-	
+		var json=[];
+		var flag=true;
+		for(i=0;i<elements.length;i++){
+			if(elements[i].value>0){
+				if(parseFloat(quantity[i].value)>=elements[i].value){
+					json.push(JSON.parse('{"id":"'+elements[i].name+'","q":"'+elements[i].value+'"}'));
+				}else{
+					flag=false;
+					var p=document.createElement("p");
+					var node = document.createTextNode("Valore non corretto");
+					p.setAttribute("class","errorInput");
+					p.appendChild(node);
+					elements[i].parentNode.insertBefore(p,elements[i].nextSibling);
+				}
+			}
+			
+		}	
+		if(flag){
+			var jsonS=JSON.stringify(json);
+			jsonS=encodeURIComponent(jsonS);;
+			var xhttp=getXmlHttpRequest();
+			xhttp.onreadystatechange=function(){
+				if(xhttp.readyState==4 && xhttp.status==200){
+					var text=xhttp.responseText;
+					var s;
+					if(text=="true"){
+						var s = "Operazione completata";
+					}
+					else{
+						var s="Errore nel completare l'operazione";
+					}
+					window.alert(s);
+					window.location.reload();
+				}			
+			};
+			xhttp.open("GET","scaricaMerce?obj="+jsonS,true);
+			xhttp.send();
+		}
+	}
 	</script>
-</body>
 </html>
