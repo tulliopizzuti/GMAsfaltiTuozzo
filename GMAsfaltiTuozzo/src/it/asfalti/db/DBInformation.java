@@ -206,7 +206,7 @@ public class DBInformation implements GetInformation {
 			ps.setString(1, op.getIdM());
 			ps.setString(2, "Scarico");
 			ps.setDate(3, data);
-			ps.setString(4, "client");
+			ps.setString(4, op.getDa_a());
 			ps.executeUpdate();
 			ps=connection.prepareStatement(ultimaOp);
 			ResultSet rs =ps.executeQuery();
@@ -362,16 +362,8 @@ public class DBInformation implements GetInformation {
 			}
 			removeOperationSosp(idOp);
 			
-			
-			
-			
-			
-			
-			/*
-			
-			INSERIRE PARTE PER REGISTRARE L'OPERAZIONE CONCLUSA A CHI SPEDISCE
-			
-			*/
+			updateDa_aOperation(operation.getDa_a(), idM);
+		
 			connection.commit();
 			ps.close();
 			return true;
@@ -470,7 +462,6 @@ public class DBInformation implements GetInformation {
 		}
 		finally{
 			try{
-			
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 			catch(SQLException e){
@@ -541,7 +532,7 @@ public class DBInformation implements GetInformation {
 
 
 	@Override
-	public boolean updateDa_aOperation(int idOp, String idM,String da_a) {
+	public boolean updateDa_aOperation(String idM,String da_a) {
 		ArrayList<OperazioneSospesaBean> operations= getOrdiniScarico(idM);
 		OperazioneSospesaBean operation=null;
 		for(OperazioneSospesaBean o:operations){
@@ -551,35 +542,10 @@ public class DBInformation implements GetInformation {
 			}
 		}
 		if(operation==null) return false;
-		Connection connection=null;
-		try{
-			connection=DriverManagerConnectionPool.getConnection();
-			
-			
-			
-			
-			
-			
-			
-		}
-		catch(SQLException e){
-			System.out.println("SQLError: "+e.getMessage());
-			return false;
-		
-		}
-		finally{
-			try{
-			
-				DriverManagerConnectionPool.releaseConnection(connection);
-			}
-			catch(SQLException e){
-				System.out.println("SQLError: "+e.getMessage());
-			}
-		}		
-		
+		registraScarico(operation);
+		removeOperationSosp(operation.getIdOp());
 		return true;
-		
-		
+
 	}
 
 

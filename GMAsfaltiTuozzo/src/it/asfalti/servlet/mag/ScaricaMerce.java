@@ -45,7 +45,7 @@ public class ScaricaMerce extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		MagazzinoBean user=(MagazzinoBean) session.getAttribute("user");
-		OperazioneCompletataBean op=new OperazioneCompletataBean(" ", user.getIdM(), " ", new Date(System.currentTimeMillis()), " ",new ArrayList<ComposizioneBean>() );
+		OperazioneCompletataBean op=new OperazioneCompletataBean(" ", user.getIdM(), "client", new Date(System.currentTimeMillis()), " ",new ArrayList<ComposizioneBean>() );
 		JSONArray obj=new JSONArray(request.getParameter("obj"));
 		
 		for(int i=0;i<obj.length();i++){

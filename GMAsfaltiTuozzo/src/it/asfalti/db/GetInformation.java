@@ -20,6 +20,6 @@ public interface GetInformation {
 	public ArrayList<OperazioneSospesaBean> getOperazioniSosp(String idM);
 	public boolean registraOpSosp(String idOp,String idM);
 	public ArrayList<OperazioneSospesaBean> getOrdiniScarico(String idM);
-	public boolean updateDa_aOperation(int idOp, String idM,String da_a);
+	public boolean updateDa_aOperation(String idM,String da_a);
 	
 }
