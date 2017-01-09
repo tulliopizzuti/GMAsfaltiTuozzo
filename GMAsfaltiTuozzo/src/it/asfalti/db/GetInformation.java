@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import it.asfalti.javabean.DisponibilitaBean;
 import it.asfalti.javabean.MagazzinoBean;
 import it.asfalti.javabean.OperazioneCompletataBean;
+import it.asfalti.javabean.OperazioneSospesaBean;
 
 public interface GetInformation {
 	public MagazzinoBean checkLogin(String username, String password);
@@ -13,4 +14,8 @@ public interface GetInformation {
 	public boolean scaricaMerce(String idM,String idP,float q);
 	public boolean registraScarico(OperazioneCompletataBean op);
 	public void cleanDisp(String idM);
+	public int getUltimaOpCompl();
+	public void removeOperationSosp(String idOp);
+	public ArrayList<OperazioneSospesaBean> getOperazioniSosp(String idM);
+	public boolean registraOpSosp(String idOp,String idM);
 }
