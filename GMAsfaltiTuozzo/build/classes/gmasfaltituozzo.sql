@@ -51,7 +51,7 @@ create database gmasfalti;
 		quantita float(10,2) not null,
 
 		primary key(idOperazione,idProduct),
-		foreign key(idOperazione) references operazioniCompletate(idOperazione) on update cascade,
+		foreign key(idOperazione) references operazioniCompletate(idOperazione) on update cascade on delete cascade,
 		foreign key(idProduct) references prodotto(idProduct) on update cascade
 		);
 
@@ -63,7 +63,7 @@ create database gmasfalti;
 		data datetime not null,
 		da_a char(6) not null,
 		
-		primary key(idOperazione,idM),
+		primary key(idOperazione,idM,da_a),
 		foreign key(idM) references magazzino(idM) on update cascade,
 		foreign key(da_a) references magazzino(idM) on update cascade
 		);

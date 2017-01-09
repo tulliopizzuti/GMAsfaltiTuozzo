@@ -361,6 +361,17 @@ public class DBInformation implements GetInformation {
 				modifyDisp("+", c.getProdotto().getId(), idM, c.getQuantita());
 			}
 			removeOperationSosp(idOp);
+			
+			
+			
+			
+			
+			
+			/*
+			
+			INSERIRE PARTE PER REGISTRARE L'OPERAZIONE CONCLUSA A CHI SPEDISCE
+			
+			*/
 			connection.commit();
 			ps.close();
 			return true;
@@ -371,7 +382,6 @@ public class DBInformation implements GetInformation {
 		}
 		finally{
 			try{
-			
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 			catch(SQLException e){
@@ -380,7 +390,7 @@ public class DBInformation implements GetInformation {
 		}	
 		
 	}
-
+	
 	@Override
 	public int getUltimaOpCompl() {
 		String ultimaOp="select max(idOperazione) as max from operazionicompletate;";
@@ -468,4 +478,112 @@ public class DBInformation implements GetInformation {
 			}
 		}		
 	}
+
+	
+	@Override
+	public ArrayList<OperazioneSospesaBean> getOrdiniScarico(String idM) {
+		ArrayList<OperazioneSospesaBean> op=null;
+		Connection connection=null;
+		
+		String selectOp="select * from operazioniInSospeso where  operazioniInSospeso.idM=? and tipo='Scarico';";
+		String selectComp= "select * from composizioneOpSosp,prodotto"
+				+ " where  idOperazione=? and idOperazione=composizioneopsosp.idOperazione "
+				+ "and composizioneopsosp.idProduct=prodotto.idProduct;";
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(selectOp);
+			ps.setString(1, idM);
+			ResultSet rs=ps.executeQuery();
+			if(rs!=null){
+				op=new ArrayList<OperazioneSospesaBean>();
+				while(rs.next()){
+					op.add(new OperazioneSospesaBean(rs.getString("idOperazione"),
+							rs.getString("idM"),
+							rs.getString("tipo"),
+							rs.getString("stato"),
+							rs.getString("da_a"),
+							rs.getDate("data"), 
+							null));
+				}
+			}
+			ps=connection.prepareStatement(selectComp);
+			for(OperazioneCompletataBean operation: op){
+				ps.setString(1, operation.getIdOp());
+				rs=ps.executeQuery();
+				if(rs!=null){
+					ArrayList<ComposizioneBean> comp=new ArrayList<ComposizioneBean>();
+					while(rs.next()){
+					comp.add(new ComposizioneBean(rs.getString("idOperazione"),
+							rs.getFloat("quantita"),
+							new ProdottoBean(rs.getString("idProduct"),
+									rs.getString("descrizioneP"),
+									rs.getString("unitaDiMisura"))));
+					}
+					operation.setListaProdotti(comp);
+				}
+			}
+			rs.close();
+			ps.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+		}
+		finally{
+			try{
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		return op;
+	}
+
+
+	@Override
+	public boolean updateDa_aOperation(int idOp, String idM,String da_a) {
+		ArrayList<OperazioneSospesaBean> operations= getOrdiniScarico(idM);
+		OperazioneSospesaBean operation=null;
+		for(OperazioneSospesaBean o:operations){
+			if(o.getDa_a().equals(da_a)){
+				operation=o;
+				break;
+			}
+		}
+		if(operation==null) return false;
+		Connection connection=null;
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			
+			
+			
+			
+			
+			
+			
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+			return false;
+		
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		
+		return true;
+		
+		
+	}
+
+
+
+
+
 }

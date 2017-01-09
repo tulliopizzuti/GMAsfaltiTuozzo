@@ -17,9 +17,9 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="style\opsosp.css" rel="stylesheet" type="text/css">
+<link href="style\ordscarico.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="script\ajax.js"></script>
-<title>Operazioni sospese Magazzino <%=user.getIdM() %></title>
+<title>Ordini di scarico Magazzino <%=user.getIdM() %></title>
 </head>
 <body>
 	<div class="main">
@@ -54,10 +54,10 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 							<td><%=operation.getTipo() %> </td>
 							<td><%=operation.getDa_a() %> </td>
 							<td><%=operation.getStato() %> </td>
-							<%if(operation.getStato().equals("Spedita")){ %>
+							<%if(operation.getStato().equals("Elaborazione")){ %>
 								<td>
 									<button id=<%= operation.getIdOp()%>  
-									onClick="change(this)">Consegnata</button>
+									onClick="change(this)">Spedita</button>
 								</td>
 							<%} %>
 						</tr>
@@ -85,7 +85,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 					<%} %>
 			<%} else { %>
 				<div id="nulldisp">
-					Non hai Operazioni di carico in sospeso!
+					Non hai Ordini di scarico
 				</div>
 			<%} %>
 		</div>
