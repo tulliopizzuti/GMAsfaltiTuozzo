@@ -74,6 +74,6 @@ create database gmasfalti;
 		quantita float(10,2) not null,
 
 		primary key(idOperazione,idProduct),
-		foreign key(idOperazione) references operazioniInSospeso(idOperazione) on update cascade,
+		foreign key(idOperazione) references operazioniInSospeso(idOperazione) on update cascade on delete cascade,
 		foreign key(idProduct) references prodotto(idProduct) on update cascade
 		);

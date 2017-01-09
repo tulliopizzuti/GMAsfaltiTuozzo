@@ -73,7 +73,7 @@ insert into composizioneOpCompl values(3,"GUAG20",50.0);
 
 
 /* Aggiuntive */
-insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag001","Carico","Elaborazione",'2016-12-15',"fornit");
+insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag001","Carico",2,'2016-12-15',"fornit");
 insert into composizioneOpSosp values(1,"TNT",100.0);
 insert into composizioneOpSosp values(1,"PA33003",10.0);
 insert into composizioneOpSosp values(1,"PA3200F",5.0);

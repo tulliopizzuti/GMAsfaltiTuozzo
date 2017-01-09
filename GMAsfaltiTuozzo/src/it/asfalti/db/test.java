@@ -1,9 +1,5 @@
 package it.asfalti.db;
 
-import java.util.ArrayList;
-
-import it.asfalti.javabean.OperazioneSospesaBean;
-
 public class test {
 
 	public static void main(String[] args) {

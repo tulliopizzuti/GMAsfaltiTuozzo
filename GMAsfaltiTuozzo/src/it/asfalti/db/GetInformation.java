@@ -16,6 +16,7 @@ public interface GetInformation {
 	public void cleanDisp(String idM);
 	public int getUltimaOpCompl();
 	public void removeOperationSosp(String idOp);
+	public void modifyDisp(String operation,String idP,String idM,float q);
 	public ArrayList<OperazioneSospesaBean> getOperazioniSosp(String idM);
 	public boolean registraOpSosp(String idOp,String idM);
 }

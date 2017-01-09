@@ -17,7 +17,8 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="style\opconcl.css" rel="stylesheet" type="text/css">
+<link href="style\opsosp.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="script\ajax.js"></script>
 <title>Operazioni sospese Magazzino <%=user.getIdM() %></title>
 </head>
 <body>
@@ -84,7 +85,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 					<%} %>
 			<%} else { %>
 				<div id="nulldisp">
-					Non hai disponibilità di prodotti! Devi ordinarli!
+					Non hai Operazioni di carico in sospeso!
 				</div>
 			<%} %>
 		</div>
@@ -96,7 +97,23 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 		
 		
 		
-		
+		var xhttp=getXmlHttpRequest();
+		xhttp.onreadystatechange=function(){
+			if(xhttp.readyState==4 && xhttp.status==200){
+				var text=xhttp.responseText;
+				var s;
+				if(text=="true"){
+					var s = "Operazione completata";
+				}
+				else{
+					var s="Errore nel completare l'operazione";
+				}
+				window.alert(s);
+				window.location.reload();
+			}			
+		};
+		xhttp.open("GET","registraCarico?id="+element.id,true);
+		xhttp.send();
 	}
 
 

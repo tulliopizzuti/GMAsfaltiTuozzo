@@ -358,6 +358,7 @@ public class DBInformation implements GetInformation {
 				ps.setString(2, c.getProdotto().getId());
 				ps.setFloat(3, c.getQuantita());
 				ps.executeUpdate();
+				modifyDisp("+", c.getProdotto().getId(), idM, c.getQuantita());
 			}
 			removeOperationSosp(idOp);
 			connection.commit();
@@ -436,5 +437,35 @@ public class DBInformation implements GetInformation {
 			}
 		}		
 		
+	}
+
+	@Override
+	public void modifyDisp(String operation, String idP, String idM, float q) {
+		String sql="update disponibilita set quantita=quantita"+operation+"? "
+				+ "where idM=? and idProduct=?;";
+		Connection connection=null;
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(sql);
+			ps.setString(2, idM);
+			ps.setFloat(1, q);
+			ps.setString(3, idP);
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+		
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
 	}
 }
