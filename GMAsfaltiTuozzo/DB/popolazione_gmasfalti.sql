@@ -74,14 +74,14 @@ insert into composizioneOpCompl values(3,"GUAG20",50.0);
 
 /* Aggiuntive */
 
-insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag002","Scarico",2,'2016-12-15',"mag001");
+insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag002","Scarico",1,'2016-12-15',"mag001");
 insert into composizioneOpSosp values(1,"TNT",100.0);
 
-insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag001","Carico",2,'2016-12-15',"mag002");
+insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag001","Carico",1,'2016-12-15',"mag002");
 insert into composizioneOpSosp values(2,"TNT",100.0);
 
-insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag002","Scarico",2,'2016-12-15',"mag001");
+insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag002","Scarico",1,'2016-12-15',"mag001");
 insert into composizioneOpSosp values(3,"GUAG20",100.0);
 
-insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag001","Carico",2,'2016-12-15',"mag002");
+insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag001","Carico",1,'2016-12-15',"mag002");
 insert into composizioneOpSosp values(4,"GUAG20",100.0);

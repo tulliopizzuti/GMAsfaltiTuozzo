@@ -548,6 +548,35 @@ public class DBInformation implements GetInformation {
 
 	}
 
+	@Override
+	public boolean scaricaMerce(String id) {
+		Connection connection=null;
+		String st="update operazioniinsospeso set stato=2 where idOperazione=? or idOperazione=?;";
+		
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(st);
+			ps.setInt(1,Integer.parseInt(id));
+			ps.setInt(2, Integer.parseInt(id)+1);
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();			
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+			return false;
+		}
+		finally{
+			try{
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		return true;
+	}
+
 
 
 

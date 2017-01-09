@@ -109,7 +109,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 				window.location.reload();
 			}			
 		};
-		xhttp.open("GET","registraCarico?id="+element.id,true);
+		xhttp.open("GET","spedisciMerce?id="+element.id,true);
 		xhttp.send();
 	}
 
