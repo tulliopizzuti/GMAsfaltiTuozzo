@@ -26,5 +26,9 @@ public interface GetInformation {
 	public boolean scaricaMerce(String id);
 	public ArrayList<ProdottoBean> getAllProduct();
 	public boolean insertOpSosp(OperazioneSospesaBean op);
+
+	//FUNZIONI AMMINISTRATORE
+	
+	public ArrayList<MagazzinoBean> getAllMag();
 	
 }

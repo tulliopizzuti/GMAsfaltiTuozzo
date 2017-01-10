@@ -54,10 +54,15 @@ public class PageComposer extends HttpServlet {
 				if(page.equals("carico")){
 					getServletContext().getRequestDispatcher("/getProds").include(request, response);
 				}
-			
 			}
 			if(user.getTipo().equals("admin")){
-							
+				if(page.equals("alldisp")){
+					getServletContext().getRequestDispatcher("/getAllMag").include(request, response);
+				}	
+				if(page.equals("allopconcl")){
+					getServletContext().getRequestDispatcher("/getAllMag").include(request, response);
+				}
+				
 			}
 		}
 		

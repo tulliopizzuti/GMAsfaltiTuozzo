@@ -684,6 +684,57 @@ public class DBInformation implements GetInformation {
 		return 0;
 	}
 
+	
+	
+	
+	//FUNZIONI AMMINISTRATORE
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public ArrayList<MagazzinoBean> getAllMag() {
+		String sql="select * from Magazzino where not(idM='admin0' or idM='client' or idM='fornit');";
+		ArrayList<MagazzinoBean> mags=null;
+		Connection connection=null;
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			Statement st=connection.createStatement();
+			ResultSet rs =st.executeQuery(sql);
+			
+			if(rs!=null){
+				mags=new ArrayList<MagazzinoBean>();
+				while(rs.next()){
+					mags.add(new MagazzinoBean(rs.getString("idM"),
+							rs.getString("descrizioneM"),
+							rs.getString("citta"),
+							rs.getString("via"), 
+							rs.getString("cap"), 
+							rs.getString("nCivico"), 
+							rs.getString("passwordM"),
+							rs.getString("tipo")));
+				}
+			}
+			
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}
+		return mags;
+	}
+
 
 
 
