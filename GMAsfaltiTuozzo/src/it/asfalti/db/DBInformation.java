@@ -7,7 +7,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+
+
 
 import it.asfalti.javabean.ComposizioneBean;
 import it.asfalti.javabean.DisponibilitaBean;
@@ -575,6 +578,110 @@ public class DBInformation implements GetInformation {
 			}
 		}		
 		return true;
+	}
+
+	@Override
+	public ArrayList<ProdottoBean> getAllProduct() {
+		ArrayList<ProdottoBean> prod=null;
+		Connection connection=null;
+		String sql="select * from prodotto;";
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			Statement st=connection.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			if(rs!=null){
+				prod=new ArrayList<ProdottoBean>();
+				while(rs.next()){
+					prod.add(new ProdottoBean(rs.getString("idProduct"),
+							rs.getString("descrizioneP"), 
+							rs.getString("unitaDiMisura")));
+				}
+			}
+			rs.close();
+			st.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+		}
+		finally{
+			try{
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		return prod;
+	}
+
+	@Override
+	public boolean insertOpSosp(OperazioneSospesaBean op) {
+		Connection connection=null;
+		String insertOpSosp="insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values (?,1,1,?,'admin0');";
+		String insertOpCompos="insert into composizioneOpSosp values(?,?,?);";
+		
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(insertOpSosp);
+			ps.setString(1, op.getIdM());
+			ps.setDate(2, new Date(System.currentTimeMillis()));
+			ps.executeUpdate();
+			connection.commit();
+
+			int max=getUltimaOpSosp();
+			ps=connection.prepareStatement(insertOpCompos);
+			for(ComposizioneBean c:op.getListaProdotti()){
+				ps.setInt(1, max);
+				ps.setString(2, c.getProdotto().getId());
+				ps.setFloat(3, c.getQuantita());
+				ps.executeUpdate();
+			}
+			connection.commit();
+			ps.close();
+			return true;
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+			return false;
+		}
+		finally{
+			try{
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}	
+	}
+
+	@Override
+	public int getUltimaOpSosp() {
+		String ultimaOp="select max(idOperazione) as max from operazioniInSospeso;";
+		Connection connection=null;
+		
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(ultimaOp);
+			ResultSet rs =ps.executeQuery();
+			Integer max=null;
+			if(rs!=null && rs.next())
+				max=rs.getInt("max");
+			if(max!=null)
+				return max;
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}
+		return 0;
 	}
 
 
