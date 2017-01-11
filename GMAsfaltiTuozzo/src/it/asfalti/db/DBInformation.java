@@ -895,6 +895,37 @@ public class DBInformation implements GetInformation {
 		return true;
 	}
 
+	@Override
+	public boolean updateMag(String id, String value, String campo) {
+		Connection connection=null;
+		String sql="update magazzino set "+campo+"=? "
+				+ "where idM=?;";
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(sql);
+			ps.setString(1, value);
+			ps.setString(2,id);
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+			return false;
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		
+		return true;
+	}
+
 
 
 

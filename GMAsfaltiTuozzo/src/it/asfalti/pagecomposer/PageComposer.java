@@ -68,6 +68,9 @@ public class PageComposer extends HttpServlet {
 				if(page.equals("modprod")){
 					getServletContext().getRequestDispatcher("/getProds").include(request, response);
 				}
+				if(page.equals("modmag")){
+					getServletContext().getRequestDispatcher("/getAllMag").include(request, response);
+				}
 			}
 		}
 		
