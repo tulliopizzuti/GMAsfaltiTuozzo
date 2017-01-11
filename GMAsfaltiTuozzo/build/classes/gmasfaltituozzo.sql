@@ -29,7 +29,7 @@ create database gmasfalti;
 		idProduct varchar(10) not null,
 		
 		primary key(idM,idProduct),
-		foreign key(idM) references magazzino(idM) on update cascade,
+		foreign key(idM) references magazzino(idM) on update cascade on delete cascade,
 		foreign key(idProduct) references prodotto(idProduct) on update cascade
 		);
 
@@ -41,8 +41,8 @@ create database gmasfalti;
 		da_a char(6) not null,
 		
 		primary key(idOperazione),
-		foreign key(idM) references magazzino(idM) on update cascade,
-		foreign key(da_a) references magazzino(idM) on update cascade
+		foreign key(idM) references magazzino(idM) on update cascade on delete cascade,
+		foreign key(da_a) references magazzino(idM) on update cascade on delete cascade
 		);
 
 	create table composizioneOpCompl(
@@ -64,8 +64,8 @@ create database gmasfalti;
 		da_a char(6) not null,
 		
 		primary key(idOperazione,idM,da_a),
-		foreign key(idM) references magazzino(idM) on update cascade,
-		foreign key(da_a) references magazzino(idM) on update cascade
+		foreign key(idM) references magazzino(idM) on update cascade on delete cascade,
+		foreign key(da_a) references magazzino(idM) on update cascade on delete cascade
 		);
 
 	create table composizioneOpSosp(
