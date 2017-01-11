@@ -64,7 +64,6 @@
 <script type="text/javascript">
 
 	function send(){
-		console.log("ciao");
 		var id=document.getElementById("iName").value;
 		var desc=document.getElementById("pTextD").value;
 		var e=document.getElementById("Pmis");

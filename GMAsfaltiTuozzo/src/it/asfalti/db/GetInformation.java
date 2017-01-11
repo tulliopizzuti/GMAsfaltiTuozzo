@@ -34,4 +34,5 @@ public interface GetInformation {
 	public boolean eliminaProd(String id);
 	public ArrayList<ProdottoBean> getAllProductEliminabile();
 	public boolean updateProd(String id, String value, String campo);
+	public boolean creaMag(MagazzinoBean mag);
 }

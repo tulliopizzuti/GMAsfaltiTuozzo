@@ -860,6 +860,41 @@ public class DBInformation implements GetInformation {
 		return true;
 	}
 
+	@Override
+	public boolean creaMag(MagazzinoBean mag) {
+		String sql="insert into magazzino values (?,?,?, ?,?,?,?,'mag');";
+		Connection connection=null;
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(sql);
+			ps.setString(1, mag.getIdM());
+			ps.setString(2,mag.getDescrizione());
+			ps.setString(3, mag.getCitta());
+			ps.setString(4, mag.getVia());
+			ps.setString(5, mag.getCap());
+			ps.setString(6, mag.getnCivico());
+			ps.setString(7, mag.getPassword());
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+			return false;
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		
+		return true;
+	}
+
 
 
 
