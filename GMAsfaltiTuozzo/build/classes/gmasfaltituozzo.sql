@@ -15,7 +15,7 @@ create database gmasfalti;
 		);
 
 	create table prodotto(
-		idProduct varchar(10) not null,
+		idProduct varchar(10) not null ,
 		unitaDiMisura enum('Pz','Kg','Lt','Mq','Ml','Rt','') not null default '',
 		descrizioneP varchar(100) not null,
 		

@@ -80,11 +80,12 @@
 		var json=[];
 		for(i=0;i<checkbox.length;i++){
 			if(checkbox[i].checked){
-				json.put({"id":checkbox[i].value});
+				json.push({"id":checkbox[i].value});
 			}
 		}		
 		jsonS=JSON.stringify(json);
 		jsonS=encodeURIComponent(jsonS);
+		var xhttp=getXmlHttpRequest();
 		xhttp.onreadystatechange=function(){
 			if(xhttp.readyState==4 && xhttp.status==200){
 				var text=xhttp.responseText;
@@ -93,7 +94,7 @@
 					var s = "Operazione completata";
 				}
 				else{
-					var s="Errore nel completare l'operazione";
+					var s="Errore nel completare l'operazione per alcuni prodotti";
 				}
 				window.alert(s);
 				window.location.reload();					

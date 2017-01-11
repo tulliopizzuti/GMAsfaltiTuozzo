@@ -15,7 +15,7 @@ create database gmasfalti;
 		);
 
 	create table prodotto(
-		idProduct varchar(10) not null,
+		idProduct varchar(10) not null ,
 		unitaDiMisura enum('Pz','Kg','Lt','Mq','Ml','Rt','') not null default '',
 		descrizioneP varchar(100) not null,
 		
@@ -52,7 +52,7 @@ create database gmasfalti;
 
 		primary key(idOperazione,idProduct),
 		foreign key(idOperazione) references operazioniCompletate(idOperazione) on update cascade on delete cascade,
-		foreign key(idProduct) references prodotto(idProduct) on update cascade
+		foreign key(idProduct) references prodotto(idProduct) on update cascade 
 		);
 
 	create table operazioniInSospeso(

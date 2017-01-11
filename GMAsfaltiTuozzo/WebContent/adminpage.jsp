@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="style\ammpage.css" rel="stylesheet" type="text/css">
+<link href="style\adminpage.css" rel="stylesheet" type="text/css">
 <title>Amministratore</title>
 </head>
 <body>

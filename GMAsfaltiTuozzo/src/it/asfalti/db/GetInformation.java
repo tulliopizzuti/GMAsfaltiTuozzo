@@ -32,5 +32,5 @@ public interface GetInformation {
 	public ArrayList<MagazzinoBean> getAllMag();
 	public boolean creaProd(String id,String desc,String mis);
 	public boolean eliminaProd(String id);
-	
+	public ArrayList<ProdottoBean> getAllProductEliminabile();
 }

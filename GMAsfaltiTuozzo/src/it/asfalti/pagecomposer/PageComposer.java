@@ -62,6 +62,9 @@ public class PageComposer extends HttpServlet {
 				if(page.equals("allopconcl")){
 					getServletContext().getRequestDispatcher("/getAllMag").include(request, response);
 				}
+				if(page.equals("delprod")){
+					getServletContext().getRequestDispatcher("/getProdsElim").include(request, response);
+				}
 				
 			}
 		}

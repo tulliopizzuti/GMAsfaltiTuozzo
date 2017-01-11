@@ -795,6 +795,40 @@ public class DBInformation implements GetInformation {
 		}		
 	}
 
+	@Override
+	public ArrayList<ProdottoBean> getAllProductEliminabile() {
+		ArrayList<ProdottoBean> prod=null;
+		Connection connection=null;
+		String sql="SELECT * FROM gmasfalti.prodotto where idProduct not in (SELECT distinct idProduct from gmasfalti.composizioneopcompl);";
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			Statement st=connection.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			if(rs!=null){
+				prod=new ArrayList<ProdottoBean>();
+				while(rs.next()){
+					prod.add(new ProdottoBean(rs.getString("idProduct"),
+							rs.getString("descrizioneP"), 
+							rs.getString("unitaDiMisura")));
+				}
+			}
+			rs.close();
+			st.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+		}
+		finally{
+			try{
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		return prod;
+	}
+
 
 
 
