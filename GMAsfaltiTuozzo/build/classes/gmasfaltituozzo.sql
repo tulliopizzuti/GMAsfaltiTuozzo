@@ -52,7 +52,7 @@ create database gmasfalti;
 
 		primary key(idOperazione,idProduct),
 		foreign key(idOperazione) references operazioniCompletate(idOperazione) on update cascade on delete cascade,
-		foreign key(idProduct) references prodotto(idProduct) on update cascade
+		foreign key(idProduct) references prodotto(idProduct) on update cascade 
 		);
 
 	create table operazioniInSospeso(

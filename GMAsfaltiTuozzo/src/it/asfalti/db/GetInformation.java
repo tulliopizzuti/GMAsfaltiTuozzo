@@ -33,4 +33,5 @@ public interface GetInformation {
 	public boolean creaProd(String id,String desc,String mis);
 	public boolean eliminaProd(String id);
 	public ArrayList<ProdottoBean> getAllProductEliminabile();
+	public boolean updateProd(String id, String value, String campo);
 }

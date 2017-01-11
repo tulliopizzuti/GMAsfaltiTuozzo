@@ -65,7 +65,9 @@ public class PageComposer extends HttpServlet {
 				if(page.equals("delprod")){
 					getServletContext().getRequestDispatcher("/getProdsElim").include(request, response);
 				}
-				
+				if(page.equals("modprod")){
+					getServletContext().getRequestDispatcher("/getProds").include(request, response);
+				}
 			}
 		}
 		
