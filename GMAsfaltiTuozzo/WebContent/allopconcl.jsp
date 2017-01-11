@@ -8,7 +8,6 @@ java.util.ArrayList,it.asfalti.javabean.OperazioneCompletataBean" %>
 		response.sendRedirect("pagecomposer");
 		return;	
 	}
-	ArrayList<OperazioneCompletataBean> ops=(ArrayList<OperazioneCompletataBean>)request.getAttribute("ops"); 
 	ArrayList<MagazzinoBean> mags=(ArrayList<MagazzinoBean>)request.getAttribute("mags"); 
 
 %>
@@ -43,7 +42,7 @@ java.util.ArrayList,it.asfalti.javabean.OperazioneCompletataBean" %>
 			</ul>		
 		</nav>
 		<div id="dynamiccontent">
-			<%if(ops!=null && ops.size()>0){ %>
+			<%if(mags!=null && mags.size()>0){ %>
 				<p id="idMagazzinoP">Id magazzino</p>
 				<select id="selectMag" onChange="getDisp(this)">
 					<option value="none"> </option>
@@ -52,7 +51,7 @@ java.util.ArrayList,it.asfalti.javabean.OperazioneCompletataBean" %>
 					<%} %>
 				</select>
 				<div id="magOp" style="visibility:hidden;">
-					<table id="infOpTable">
+					<table class="infOpTable">
 						<caption>Disponibilità prodotti del magazzino</caption>
 							<tr id="tHeader"> 
 								<th>Codice Operazione </th>
@@ -61,7 +60,7 @@ java.util.ArrayList,it.asfalti.javabean.OperazioneCompletataBean" %>
 								<th>Mittente/Destinazione </th>
 							</tr>							
 					</table>
-					<table id="compOpTable">
+					<table class="compOpTable">
 							<tr> 
 								<th>Codice Prodotto </th>
 								<th>Descrizione </th>
@@ -73,7 +72,7 @@ java.util.ArrayList,it.asfalti.javabean.OperazioneCompletataBean" %>
 				</div>				
 			<%} else { %>
 				<div id="nulldisp">
-					Nessuna operazione!
+					Nessun magazzino!
 				</div>
 			<%} %>
 		</div>
@@ -81,37 +80,63 @@ java.util.ArrayList,it.asfalti.javabean.OperazioneCompletataBean" %>
 </body>
 
 <script type="text/javascript">
-	var table=document.getElementById("magTable").cloneNode(true);
-	var div=document.getElementById("magDisp");
+	var infOpTable=document.getElementsByClassName("infOpTable")[0].cloneNode(true);
+	var compOpTable=document.getElementsByClassName("compOpTable")[0].cloneNode(true);
+	var div=document.getElementById("magOp");
 	function getDisp(optionElement){
 		var id=optionElement.options[optionElement.selectedIndex].value;
-		document.getElementById("magTable").remove();
-		div.appendChild(table);
-		table=table.cloneNode(true);
+		var inf=document.getElementsByClassName("infOpTable");
+		console.log(inf.length);
+		for(i=0;i<inf.length;i++){ inf[i].remove();}
+		var comp=document.getElementsByClassName("compOpTable");
+		for(i=0;i<comp.length;i++){ comp[i].remove();}
+		
 		div.style.visibility="hidden";
 		var xhttp=getXmlHttpRequest();
 		if(id!="none"){
 			xhttp.onreadystatechange=function(){
 				if(xhttp.readyState==4 && xhttp.status==200){
-					var text=xhttp.responseText;
-					var disp=JSON.parse(text);
 					div.style.visibility="visible";
-					var t=document.getElementById("magTable");
-					for(i=0;i<disp.length;i++){
+					var text=xhttp.responseText;
+					var ops=JSON.parse(text);
+					for(i=0;i<ops.length;i++){
+						var iT=infOpTable.cloneNode(true);
+						var cT=compOpTable.cloneNode(true);
+						div.appendChild(iT);
+						div.appendChild(cT);
 						var row=document.createElement("tr");
 						var id=document.createElement("td");
-						var desc=document.createElement("td");
-						var mis=document.createElement("td");
-						var q=document.createElement("td");
-						id.appendChild(document.createTextNode(disp[i].id));
-						desc.appendChild(document.createTextNode(disp[i].desc));
-						mis.appendChild(document.createTextNode(disp[i].mis));
-						q.appendChild(document.createTextNode(disp[i].q));
+						var idM=document.createElement("td");
+						var data=document.createElement("td");
+						var da_a=document.createElement("td");
+						var tipo=document.createElement("td");
+						id.appendChild(document.createTextNode(ops[i].idO));
 						row.appendChild(id);
-						row.appendChild(desc);
-						row.appendChild(mis);
-						row.appendChild(q);
-						t.appendChild(row);
+						idM.appendChild(document.createTextNode(ops[i].idM));
+						row.appendChild(idM);
+						data.appendChild(document.createTextNode(ops[i].data));
+						row.appendChild(data);
+						da_a.appendChild(document.createTextNode(ops[i].da_a));
+						row.appendChild(da_a);
+						tipo.appendChild(document.createTextNode(ops[i].tipo));
+						row.appendChild(tipo);
+						iT.appendChild(row);
+						for(j=0;j<ops[i].prods.length;j++){
+							var comP=document.createElement("tr");
+							var idP=document.createElement("td");
+							var pDesc=document.createElement("td");
+							var pMis=document.createElement("td");
+							var pQ=document.createElement("td");
+							idP.appendChild(document.createTextNode(ops[i].prods[j].idP));
+							comP.appendChild(idP);
+							pDesc.appendChild(document.createTextNode(ops[i].prods[j].pDesc));
+							comP.appendChild(pDesc);
+							pMis.appendChild(document.createTextNode(ops[i].prods[j].pMis));
+							comP.appendChild(pMis);
+							pQ.appendChild(document.createTextNode(ops[i].prods[j].pQ));
+							comP.appendChild(pQ);
+							cT.appendChild(comP);	
+						}
 					}
 				}		
 			};
@@ -119,7 +144,7 @@ java.util.ArrayList,it.asfalti.javabean.OperazioneCompletataBean" %>
 		else{
 			div.style.visibility="hidden";
 		}
-		xhttp.open("GET","getDispOf?id="+id,true);
+		xhttp.open("GET","getOpOf?id="+id,true);
 		xhttp.send();
 	}
 </script>
