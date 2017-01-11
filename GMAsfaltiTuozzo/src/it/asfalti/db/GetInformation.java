@@ -30,5 +30,7 @@ public interface GetInformation {
 	//FUNZIONI AMMINISTRATORE
 	
 	public ArrayList<MagazzinoBean> getAllMag();
+	public boolean creaProd(String id,String desc,String mis);
+	public boolean eliminaProd(String id);
 	
 }

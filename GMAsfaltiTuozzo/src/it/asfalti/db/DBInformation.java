@@ -735,6 +735,66 @@ public class DBInformation implements GetInformation {
 		return mags;
 	}
 
+	@Override
+	public boolean creaProd(String id, String desc, String mis) {
+		String sql= "insert into prodotto values(?,?,?);";
+		Connection connection=null;
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2,mis);
+			ps.setString(3,desc);
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+			
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+			return false;
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		return true;
+	}
+
+	@Override
+	public boolean eliminaProd(String id) {
+		String sql="delete from prodotto where idProduct=?";
+		Connection connection=null;
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+			return true;
+			
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+			return false;
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+	}
+
 
 
 

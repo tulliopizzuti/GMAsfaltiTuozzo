@@ -15,7 +15,7 @@ java.util.ArrayList,it.asfalti.javabean.OperazioneCompletataBean" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="style\disp.css" rel="stylesheet" type="text/css">
+<link href="style\allopconcl.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="script\ajax.js"></script>
 <title>Operazioni di tutti i Magazzini</title>
 </head>

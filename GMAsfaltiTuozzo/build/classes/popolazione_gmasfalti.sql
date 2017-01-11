@@ -67,6 +67,10 @@ insert into composizioneOpCompl values(3,"PA3300Y",7.0);
 insert into composizioneOpCompl values(3,"TNT",100.0);
 insert into composizioneOpCompl values(3,"GUAG20",50.0);
 
+insert into operazioniCompletate(idM,tipo,data,da_a) values ("mag003","Carico",'2016-12-15',"fornit");
+
+insert into composizioneOpCompl values(4,"TNT",100.0);
+
 
 
 
