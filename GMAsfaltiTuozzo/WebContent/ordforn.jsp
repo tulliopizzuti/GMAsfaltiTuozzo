@@ -18,7 +18,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="style\adminpage.css" rel="stylesheet" type="text/css">
+<link href="style\ordfornit.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="script\ajax.js"></script>
 <title>Amministratore</title>
 </head>

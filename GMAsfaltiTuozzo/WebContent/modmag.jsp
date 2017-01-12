@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="style\modprod.css" rel="stylesheet" type="text/css">
+<link href="style\modmag.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="script\ajax.js"></script>
 <title>Amministratore</title>
 </head>
