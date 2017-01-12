@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="it.asfalti.javabean.MagazzinoBean,java.util.ArrayList,
-it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
-,it.asfalti.javabean.ProdottoBean"
+it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneCaricoBean
+,it.asfalti.javabean.ProdottoBean,it.asfalti.javabean.OrdineCaricoBean"
  %>
 <%
 	MagazzinoBean user=(MagazzinoBean)session.getAttribute("user");
@@ -12,7 +12,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 		response.sendRedirect("pagecomposer?responsepage=login");
 		return;	
 	}
-	ArrayList<OperazioneSospesaBean> ops=(ArrayList<OperazioneSospesaBean>)request.getAttribute("ops"); 
+	ArrayList<OrdineCaricoBean> ops=(ArrayList<OrdineCaricoBean>)request.getAttribute("ops"); 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -44,6 +44,48 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 			</ul>		
 		</nav>
 		<div id="dynamiccontent">
+			<%if(ops!=null && ops.size()>0){ %>
+				<h2>Richieste di carico</h2>
+				<%for(OrdineCaricoBean or:ops){ %>
+					<form action="" onSubmit="send(this)">
+						<table class="opLine">        
+							<tr> 
+								<th>Codice Operazione </th>
+								<th>Data/Ora </th>
+								<th>Tipo </th>
+								<th>Mittente/Destinazione </th>
+								<th>Stato</th>
+							</tr>
+							<tr>
+								<td><%=or.getIdOp() %> </td>
+								<td><%=or.getData() %> </td>
+								<td><%=or.getTipo() %> </td>
+								<td><%=or.getDa_a() %> </td>
+								<td><%=or.getStato() %> </td>							
+							</tr>
+						</table>
+						<%for(ComposizioneCaricoBean ccb:or.getCompCar()){ %>
+							<table class="opComp">
+								<tr> 
+									<th>Codice Prodotto </th>
+									<th>Quantità </th>
+									<th>Magazzini con disponibilità</th>
+								</tr>
+								<tr>
+									<td><%=ccb.getProdotto().getId() %> </td>
+									<td><%=ccb.getQuantita()%> </td>
+									<td>
+										<select>
+											<%for(MagazzinoBean m:ccb.getMags()){ %>
+												<option value="<%=m.getIdM() %> "><%=m.getIdM() %> </option>
+											<%} %>
+										</select>
+									</td>
+								</tr>
+							</table>
+						<%} %>
+						<input type="submit" value="Registra">				
+					</form>
 			
 			
 			
@@ -53,12 +95,12 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 			
 			
 			
-			
-			
-			
-			
-			
-			
+				<%} %>
+			<%} else { %>
+				<div id="nulldisp">
+					Non hai Operazioni di carico in sospeso!
+				</div>
+			<%} %>
 		</div>
 	</div>
 </body>

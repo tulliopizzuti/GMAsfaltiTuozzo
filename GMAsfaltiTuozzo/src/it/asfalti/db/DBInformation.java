@@ -13,10 +13,12 @@ import java.util.ArrayList;
 
 
 import it.asfalti.javabean.ComposizioneBean;
+import it.asfalti.javabean.ComposizioneCaricoBean;
 import it.asfalti.javabean.DisponibilitaBean;
 import it.asfalti.javabean.MagazzinoBean;
 import it.asfalti.javabean.OperazioneCompletataBean;
 import it.asfalti.javabean.OperazioneSospesaBean;
+import it.asfalti.javabean.OrdineCaricoBean;
 import it.asfalti.javabean.ProdottoBean;
 
 public class DBInformation implements GetInformation {
@@ -62,7 +64,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public ArrayList<DisponibilitaBean> getDisponibilita(String magID) {
+	public synchronized ArrayList<DisponibilitaBean> getDisponibilita(String magID) {
 		Connection connection=null;
 		ArrayList<DisponibilitaBean> disp=null;
 		String sql="select prodotto.idProduct,unitaDiMisura,descrizioneP,quantita"
@@ -105,7 +107,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public ArrayList<OperazioneCompletataBean> getOperazioniComp(String magID) {	
+	public synchronized ArrayList<OperazioneCompletataBean> getOperazioniComp(String magID) {	
 		ArrayList<OperazioneCompletataBean> op=null;
 		Connection connection=null;
 		
@@ -165,7 +167,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean scaricaMerce(String idM, String idP, float q) {
+	public synchronized boolean scaricaMerce(String idM, String idP, float q) {
 		Connection connection=null;
 		String sql="update disponibilita set quantita=quantita-? "
 				+ "where idM=? and idProduct=?;";
@@ -197,7 +199,7 @@ public class DBInformation implements GetInformation {
 	}
 	
 	@Override
-	public boolean registraScarico(OperazioneCompletataBean op) {
+	public synchronized boolean registraScarico(OperazioneCompletataBean op) {
 		String registraOp= "insert into operazioniCompletate(idM,tipo,data,da_a) values (?,?,?,?); ";
 		String ultimaOp="select max(idOperazione) as max from operazionicompletate;";
 		String registraComp="insert into composizioneOpCompl values(?,?,?);";
@@ -248,7 +250,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public void cleanDisp(String idM) {
+	public synchronized void cleanDisp(String idM) {
 		String sql="delete from disponibilita where idM=? and quantita=0";
 		Connection connection=null;
 		try{
@@ -275,7 +277,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public ArrayList<OperazioneSospesaBean> getOperazioniSosp(String idM) {
+	public synchronized ArrayList<OperazioneSospesaBean> getOperazioniSosp(String idM) {
 		ArrayList<OperazioneSospesaBean> op=null;
 		Connection connection=null;
 		
@@ -334,7 +336,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean registraOpSosp(String idOp,String idM) {
+	public synchronized boolean registraOpSosp(String idOp,String idM) {
 		Connection connection=null;
 		ArrayList<OperazioneSospesaBean> operations=getOperazioniSosp(idM);
 		OperazioneSospesaBean operation=null;
@@ -387,7 +389,7 @@ public class DBInformation implements GetInformation {
 	}
 	
 	@Override
-	public int getUltimaOpCompl() {
+	public synchronized int getUltimaOpCompl() {
 		String ultimaOp="select max(idOperazione) as max from operazionicompletate;";
 		Connection connection=null;
 		
@@ -417,7 +419,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public void removeOperationSosp(String idOp) {
+	public synchronized void removeOperationSosp(String idOp) {
 		String sql="delete from operazioniInSospeso where idOperazione=?";
 		Connection connection=null;
 		try{
@@ -445,7 +447,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public void modifyDisp(String operation, String idP, String idM, float q) {
+	public synchronized void modifyDisp(String operation, String idP, String idM, float q) {
 		String sql="update disponibilita set quantita=quantita"+operation+"? "
 				+ "where idM=? and idProduct=?;";
 		Connection connection=null;
@@ -474,7 +476,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public ArrayList<OperazioneSospesaBean> getOrdiniScarico(String idM) {
+	public synchronized ArrayList<OperazioneSospesaBean> getOrdiniScarico(String idM) {
 		ArrayList<OperazioneSospesaBean> op=null;
 		Connection connection=null;
 		
@@ -533,7 +535,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean updateDa_aOperation(String idM,String da_a) {
+	public synchronized boolean updateDa_aOperation(String idM,String da_a) {
 		ArrayList<OperazioneSospesaBean> operations= getOrdiniScarico(idM);
 		OperazioneSospesaBean operation=null;
 		for(OperazioneSospesaBean o:operations){
@@ -550,7 +552,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean scaricaMerce(String id) {
+	public synchronized boolean scaricaMerce(String id) {
 		Connection connection=null;
 		String st="update operazioniinsospeso set stato=2 where idOperazione=? or idOperazione=?;";
 		
@@ -579,7 +581,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public ArrayList<ProdottoBean> getAllProduct() {
+	public synchronized ArrayList<ProdottoBean> getAllProduct() {
 		ArrayList<ProdottoBean> prod=null;
 		Connection connection=null;
 		String sql="select * from prodotto;";
@@ -613,7 +615,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean insertOpSosp(OperazioneSospesaBean op) {
+	public synchronized boolean insertOpSosp(OperazioneSospesaBean op) {
 		Connection connection=null;
 		String insertOpSosp="insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values (?,1,1,?,'admin0');";
 		String insertOpCompos="insert into composizioneOpSosp values(?,?,?);";
@@ -653,7 +655,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public int getUltimaOpSosp() {
+	public synchronized int getUltimaOpSosp() {
 		String ultimaOp="select max(idOperazione) as max from operazioniInSospeso;";
 		Connection connection=null;
 		
@@ -687,7 +689,7 @@ public class DBInformation implements GetInformation {
 	
 	
 	@Override
-	public ArrayList<MagazzinoBean> getAllMag() {
+	public synchronized ArrayList<MagazzinoBean> getAllMag() {
 		String sql="select * from Magazzino where not(idM='admin0' or idM='client' or idM='fornit');";
 		ArrayList<MagazzinoBean> mags=null;
 		Connection connection=null;
@@ -727,7 +729,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean creaProd(String id, String desc, String mis) {
+	public synchronized boolean creaProd(String id, String desc, String mis) {
 		String sql= "insert into prodotto values(?,?,?);";
 		Connection connection=null;
 		try{
@@ -758,7 +760,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean eliminaProd(String id) {
+	public synchronized boolean eliminaProd(String id) {
 		String sql="delete from prodotto where idProduct=?";
 		Connection connection=null;
 		try{
@@ -787,7 +789,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public ArrayList<ProdottoBean> getAllProductEliminabile() {
+	public synchronized ArrayList<ProdottoBean> getAllProductEliminabile() {
 		ArrayList<ProdottoBean> prod=null;
 		Connection connection=null;
 		String sql="SELECT * FROM gmasfalti.prodotto where idProduct not in (SELECT distinct idProduct from gmasfalti.composizioneopcompl);";
@@ -821,7 +823,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean updateProd(String id, String value, String campo) {
+	public synchronized boolean updateProd(String id, String value, String campo) {
 		Connection connection=null;
 		String sql="update prodotto set "+campo+"=? "
 				+ "where idProduct=?;";
@@ -852,7 +854,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean creaMag(MagazzinoBean mag) {
+	public synchronized boolean creaMag(MagazzinoBean mag) {
 		String sql="insert into magazzino values (?,?,?, ?,?,?,?,'mag');";
 		Connection connection=null;
 		try{
@@ -887,7 +889,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean updateMag(String id, String value, String campo) {
+	public synchronized boolean updateMag(String id, String value, String campo) {
 		Connection connection=null;
 		String sql="update magazzino set "+campo+"=? "
 				+ "where idM=?;";
@@ -918,7 +920,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean eliminaMag(String idM) {
+	public synchronized boolean eliminaMag(String idM) {
 		String sql="delete from magazzino where idM=?";
 		Connection connection=null;
 		try{
@@ -947,7 +949,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public ArrayList<OperazioneSospesaBean> getAllOrdForn() {
+	public synchronized ArrayList<OperazioneSospesaBean> getAllOrdForn() {
 		ArrayList<OperazioneSospesaBean> op=null;
 		Connection connection=null;
 		
@@ -1005,7 +1007,7 @@ public class DBInformation implements GetInformation {
 	}
 
 	@Override
-	public boolean merceFornSpedita(String idOp) {
+	public synchronized boolean merceFornSpedita(String idOp) {
 		String sql="update operazioniInsospeso set stato=2 where idM='fornit' and tipo='Scarico'"
 				+" and idOperazione=?;";
 		String sql2="update operazioniInsospeso set stato=2 where"
@@ -1039,6 +1041,94 @@ public class DBInformation implements GetInformation {
 		return true;
 	
 	
+	}
+
+	@Override
+	public synchronized ArrayList<OrdineCaricoBean> getAllOrdCar() {
+		String getOrds="select * from operazioniinsospeso where da_a='admin0';";
+		String getCompOrd="select * from composizioneopsosp where  idOperazione=?;";
+		String getMagsDisp="select distinct(idM) from composizioneopsosp,disponibilita"
+				+ " where composizioneopsosp.idOperazione=?"
+				+ " and composizioneopsosp.idProduct=? "
+				+ "and composizioneopsosp.idProduct=disponibilita.idProduct "
+				+ "and disponibilita.quantita>composizioneopsosp.quantita;";
+		Connection connection=null;
+		ArrayList<OrdineCaricoBean> ops=null;
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			Statement st=connection.createStatement();
+			ResultSet allOpRs=st.executeQuery(getOrds);
+			
+			if(allOpRs!=null){
+				ops=new ArrayList<OrdineCaricoBean>();
+				while(allOpRs.next()){
+					String idOperazione=allOpRs.getString("idOperazione");
+					ops.add(new OrdineCaricoBean(idOperazione,
+							allOpRs.getString("idM"), 
+							allOpRs.getString("tipo"),
+							allOpRs.getDate("data"),
+							allOpRs.getString("da_a"),
+							new ArrayList<ComposizioneCaricoBean>(),
+							allOpRs.getString("stato")));
+				}
+			}
+			allOpRs.close();
+			st.close();
+			for(OrdineCaricoBean or:ops){
+				PreparedStatement psComp=connection.prepareStatement(getCompOrd);
+				psComp.setString(1, or.getIdOp());
+				ResultSet rs=psComp.executeQuery();
+				if(rs!=null){
+					while(rs.next()){
+						or.getListaProdotti().add(
+								new ComposizioneCaricoBean(rs.getString("idOperazione"),
+										rs.getFloat("quantita"),
+										new ProdottoBean(
+												rs.getString("idProduct"),
+												"",
+												""),
+										new ArrayList<MagazzinoBean>())
+								);
+					}
+				}
+				rs.close();
+				psComp.close();
+			}
+			
+			for(OrdineCaricoBean or:ops){
+				for(ComposizioneCaricoBean p:or.getListaProdotti()){
+					PreparedStatement psMag=connection.prepareStatement(getMagsDisp);
+					psMag.setString(1,or.getIdOp());
+					psMag.setString(2, p.getProdotto().getId());
+					ResultSet rsMag=psMag.executeQuery();
+					p.getMags().add(new MagazzinoBean("fornit",
+							"", "", "", "", "", "", ""));
+					if(rsMag!=null){
+						while(rsMag.next()){
+							p.getMags().add(new MagazzinoBean(rsMag.getString("idM"),
+									"", "", "", "", "", "", ""));
+						}
+					}
+						
+					rsMag.close();
+					psMag.close();
+				}
+				
+			}
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		return ops;
 	}
 
 

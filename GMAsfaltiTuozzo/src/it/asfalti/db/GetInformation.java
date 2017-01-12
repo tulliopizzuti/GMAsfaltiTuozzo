@@ -6,6 +6,7 @@ import it.asfalti.javabean.DisponibilitaBean;
 import it.asfalti.javabean.MagazzinoBean;
 import it.asfalti.javabean.OperazioneCompletataBean;
 import it.asfalti.javabean.OperazioneSospesaBean;
+import it.asfalti.javabean.OrdineCaricoBean;
 import it.asfalti.javabean.ProdottoBean;
 
 public interface GetInformation {
@@ -39,4 +40,5 @@ public interface GetInformation {
 	public boolean eliminaMag(String idM);
 	public ArrayList<OperazioneSospesaBean> getAllOrdForn();
 	public boolean merceFornSpedita(String idOp);
+	public ArrayList<OrdineCaricoBean> getAllOrdCar();
 }

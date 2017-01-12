@@ -77,6 +77,9 @@ public class PageComposer extends HttpServlet {
 				if(page.equals("ordforn")){
 					getServletContext().getRequestDispatcher("/getOrdForn").include(request, response);
 				}
+				if(page.equals("ordcarico")){
+					getServletContext().getRequestDispatcher("/getOrdCar").include(request, response);
+				}
 			}
 		}
 		
