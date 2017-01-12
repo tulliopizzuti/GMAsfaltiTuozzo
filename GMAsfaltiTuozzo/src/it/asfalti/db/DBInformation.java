@@ -473,7 +473,6 @@ public class DBInformation implements GetInformation {
 		}		
 	}
 
-	
 	@Override
 	public ArrayList<OperazioneSospesaBean> getOrdiniScarico(String idM) {
 		ArrayList<OperazioneSospesaBean> op=null;
@@ -532,7 +531,6 @@ public class DBInformation implements GetInformation {
 		}		
 		return op;
 	}
-
 
 	@Override
 	public boolean updateDa_aOperation(String idM,String da_a) {
@@ -684,15 +682,8 @@ public class DBInformation implements GetInformation {
 		return 0;
 	}
 
-	
-	
-	
+
 	//FUNZIONI AMMINISTRATORE
-	
-	
-	
-	
-	
 	
 	
 	@Override
@@ -953,6 +944,101 @@ public class DBInformation implements GetInformation {
 				System.out.println("SQLError: "+e.getMessage());
 			}
 		}
+	}
+
+	@Override
+	public ArrayList<OperazioneSospesaBean> getAllOrdForn() {
+		ArrayList<OperazioneSospesaBean> op=null;
+		Connection connection=null;
+		
+		String selectOp="select * from operazioniInSospeso where  operazioniInSospeso.idM='fornit' and tipo='Scarico';";
+		String selectComp= "select * from composizioneOpSosp,prodotto"
+				+ " where  idOperazione=? and idOperazione=composizioneopsosp.idOperazione "
+				+ "and composizioneopsosp.idProduct=prodotto.idProduct;";
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			Statement st=connection.createStatement();
+			ResultSet rs=st.executeQuery(selectOp);
+			if(rs!=null){
+				op=new ArrayList<OperazioneSospesaBean>();
+				while(rs.next()){
+					op.add(new OperazioneSospesaBean(rs.getString("idOperazione"),
+							rs.getString("idM"),
+							rs.getString("tipo"),
+							rs.getString("stato"),
+							rs.getString("da_a"),
+							rs.getDate("data"), 
+							null));
+				}
+			}
+			PreparedStatement ps=connection.prepareStatement(selectComp);
+			for(OperazioneCompletataBean operation: op){
+				ps.setString(1, operation.getIdOp());
+				rs=ps.executeQuery();
+				if(rs!=null){
+					ArrayList<ComposizioneBean> comp=new ArrayList<ComposizioneBean>();
+					while(rs.next()){
+					comp.add(new ComposizioneBean(rs.getString("idOperazione"),
+							rs.getFloat("quantita"),
+							new ProdottoBean(rs.getString("idProduct"),
+									rs.getString("descrizioneP"),
+									rs.getString("unitaDiMisura"))));
+					}
+					operation.setListaProdotti(comp);
+				}
+			}
+			rs.close();
+			ps.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+		}
+		finally{
+			try{
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		return op;
+	}
+
+	@Override
+	public boolean merceFornSpedita(String idOp) {
+		String sql="update operazioniInsospeso set stato=2 where idM='fornit' and tipo='Scarico'"
+				+" and idOperazione=?;";
+		String sql2="update operazioniInsospeso set stato=2 where"
+				+" idOperazione=?;";
+		Connection connection=null;
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(sql);
+			ps.setString(1, idOp);
+			ps.executeUpdate();
+			ps=connection.prepareStatement(sql2);
+			ps.setString(1, String.valueOf(Integer.parseInt(idOp)+1));
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+			return false;
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		
+		return true;
+	
+	
 	}
 
 

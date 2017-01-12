@@ -37,4 +37,6 @@ public interface GetInformation {
 	public boolean creaMag(MagazzinoBean mag);
 	public boolean updateMag(String id, String value, String campo);
 	public boolean eliminaMag(String idM);
+	public ArrayList<OperazioneSospesaBean> getAllOrdForn();
+	public boolean merceFornSpedita(String idOp);
 }

@@ -89,3 +89,12 @@ insert into composizioneOpSosp values(3,"GUAG20",100.0);
 
 insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag001","Carico",1,'2016-12-15',"mag002");
 insert into composizioneOpSosp values(4,"GUAG20",100.0);
+
+
+
+insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("fornit","Scarico",1,'2016-12-15',"mag002");
+insert into composizioneOpSosp values(5,"GUAG20",10.0);
+insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag002","Carico",1,'2016-12-15',"fornit");
+insert into composizioneOpSosp values(6,"GUAG20",10.0);
+
+
