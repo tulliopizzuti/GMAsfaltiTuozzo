@@ -19,6 +19,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneCarico
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="style\ordcarico.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="script\ajax.js"></script>
 <title>Amministratore</title>
 </head>
 <body>
@@ -47,7 +48,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneCarico
 			<%if(ops!=null && ops.size()>0){ %>
 				<h2>Richieste di carico</h2>
 				<%for(OrdineCaricoBean or:ops){ %>
-					<form action="" onSubmit="send(this)">
+					<form onsubmit="return reg(this)" >
 						<table class="opLine">        
 							<tr> 
 								<th>Codice Operazione </th>
@@ -75,26 +76,22 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneCarico
 									<td><%=ccb.getProdotto().getId() %> </td>
 									<td><%=ccb.getQuantita()%> </td>
 									<td>
-										<select>
+										<select name="magToSend">
 											<%for(MagazzinoBean m:ccb.getMags()){ %>
-												<option value="<%=m.getIdM() %> "><%=m.getIdM() %> </option>
+												<option value="<%=m.getIdM() %>" ><%=m.getIdM() %> </option>
 											<%} %>
 										</select>
+									</td>
+									<td>
+										<input type="hidden" value="<%=ccb.getProdotto().getId() %> " name="idProduct"/>
+										<input type="hidden" value="<%=ccb.getQuantita()%> " name="quant"/>
 									</td>
 								</tr>
 							</table>
 						<%} %>
+						<input type="hidden" value="<%=or.getIdOp() %> " name="idOperation"/>
 						<input type="submit" value="Registra">				
 					</form>
-			
-			
-			
-			
-			
-			
-			
-			
-			
 				<%} %>
 			<%} else { %>
 				<div id="nulldisp">
@@ -104,4 +101,57 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneCarico
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	
+	function reg(form){
+		var products=[];
+		for(i=0;i<form.idProduct.length;i++){
+			products.push(form.idProduct[i].value);
+		}
+		var q=[];
+		for(i=0;i<form.quant.length;i++){
+			q.push(form.quant[i].value);
+		}
+		var mags=[];
+		for(i=0;i<form.magToSend.length;i++){
+			mags.push(form.magToSend[i].options[form.magToSend[i].selectedIndex].value);
+		}
+		var idOp=form.idOperation.value;
+		if(mags.length==products.length && products.length==q.length){
+			var xhttp=getXmlHttpRequest();
+			var json={"prods":products,"q":q,"mags":mags,"idOp":idOp};
+			jsonS=JSON.stringify(json);
+			jsonS=encodeURIComponent(jsonS);
+			xhttp.onreadystatechange=function(){
+				if(xhttp.readyState==4 && xhttp.status==200){
+					var text=xhttp.responseText;
+					var s;
+					if(text=="true"){
+						var s = "Operazione completata";
+					}
+					else{
+						var s="Errore nel completare l'operazione";
+					}
+					window.alert(s);
+					window.location.reload();					
+				}
+			};	
+			xhttp.open("GET","caricaMag?obj="+jsonS,true);
+			xhttp.send();
+		}
+		else{
+			window.alert("Errore");
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return false;
+	}
+</script>
 </html>
