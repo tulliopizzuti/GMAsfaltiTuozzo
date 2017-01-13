@@ -1133,12 +1133,7 @@ public class DBInformation implements GetInformation {
 
 	@Override
 	public synchronized boolean inviaScarichi(ArrayList<OperazioneSospesaBean> ops,String oldOp) {
-		for(OperazioneSospesaBean o:ops){
-			System.out.println(o.getIdOp()+" da_a: "+o.getDa_a()+" idM: "+o.getIdM());
-			for(ComposizioneBean c:o.getListaProdotti()){
-				System.out.println(c.getProdotto().getId()+" "+c.getQuantita());
-			}
-		}
+		
 		String insertCar="insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values (?,?,1,?,?);";
 		String insertScar="insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values (?,?,1,?,?)";
 		String insertComps="insert into composizioneOpSosp values(?,?,?);";
@@ -1163,11 +1158,7 @@ public class DBInformation implements GetInformation {
 				psIScar.executeUpdate();
 				connection.commit();
 				idOpSc=idOpC+1;
-				
-				System.out.println(idOpSc);
-				psIScar.close();
-				
-				
+				psIScar.close();				
 				psICar.setString(1, o.getDa_a());
 				psICar.setString(2, "Carico");
 				psICar.setDate(3, o.getData());
@@ -1176,7 +1167,6 @@ public class DBInformation implements GetInformation {
 				connection.commit();
 				idOpC=idOpSc+1;
 				
-				System.out.println(idOpC);
 				psICar.close();
 				
 				
