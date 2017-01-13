@@ -52,6 +52,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneCarico
 						<table class="opLine">        
 							<tr> 
 								<th>Codice Operazione </th>
+								<th>Richiedente </th>
 								<th>Data/Ora </th>
 								<th>Tipo </th>
 								<th>Mittente/Destinazione </th>
@@ -59,6 +60,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneCarico
 							</tr>
 							<tr>
 								<td><%=or.getIdOp() %> </td>
+								<td><%=or.getIdM() %></td>
 								<td><%=or.getData() %> </td>
 								<td><%=or.getTipo() %> </td>
 								<td><%=or.getDa_a() %> </td>
@@ -78,7 +80,9 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneCarico
 									<td>
 										<select name="magToSend">
 											<%for(MagazzinoBean m:ccb.getMags()){ %>
-												<option value="<%=m.getIdM() %>" ><%=m.getIdM() %> </option>
+												<%if(!(or.getIdM().equals(m.getIdM()))){ %>
+													<option value="<%=m.getIdM() %>" ><%=m.getIdM() %> </option>
+												<%} %>
 											<%} %>
 										</select>
 									</td>
@@ -90,6 +94,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneCarico
 							</table>
 						<%} %>
 						<input type="hidden" value="<%=or.getIdOp() %> " name="idOperation"/>
+						<input type="hidden" value="<%=or.getIdM() %>" name="idMagToSend"/>
 						<input type="submit" value="Registra">				
 					</form>
 				<%} %>
@@ -117,9 +122,10 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneCarico
 			mags.push(form.magToSend[i].options[form.magToSend[i].selectedIndex].value);
 		}
 		var idOp=form.idOperation.value;
+		var magToSend=form.idMagToSend.value;
 		if(mags.length==products.length && products.length==q.length){
 			var xhttp=getXmlHttpRequest();
-			var json={"prods":products,"q":q,"mags":mags,"idOp":idOp};
+			var json={"prods":products,"q":q,"mags":mags,"idOp":idOp,"idMag":magToSend};
 			jsonS=JSON.stringify(json);
 			jsonS=encodeURIComponent(jsonS);
 			xhttp.onreadystatechange=function(){

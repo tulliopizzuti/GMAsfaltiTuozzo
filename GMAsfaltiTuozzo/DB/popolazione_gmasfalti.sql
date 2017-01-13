@@ -98,3 +98,6 @@ insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag002","Cari
 insert into composizioneOpSosp values(6,"GUAG20",10.0);
 
 
+insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values ("mag001","Carico",1,'2016-12-15',"admin0");
+insert into composizioneOpSosp values(7,"TNT",10.0);
+insert into composizioneOpSosp values(7,"0010P",10.0);

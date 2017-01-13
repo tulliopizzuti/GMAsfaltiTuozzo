@@ -41,4 +41,5 @@ public interface GetInformation {
 	public ArrayList<OperazioneSospesaBean> getAllOrdForn();
 	public boolean merceFornSpedita(String idOp);
 	public ArrayList<OrdineCaricoBean> getAllOrdCar();
+	public boolean inviaScarichi(ArrayList<OperazioneSospesaBean> ops,String oldOp);
 }

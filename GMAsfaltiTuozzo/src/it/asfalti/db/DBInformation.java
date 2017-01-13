@@ -1131,6 +1131,96 @@ public class DBInformation implements GetInformation {
 		return ops;
 	}
 
+	@Override
+	public synchronized boolean inviaScarichi(ArrayList<OperazioneSospesaBean> ops,String oldOp) {
+		for(OperazioneSospesaBean o:ops){
+			System.out.println(o.getIdOp()+" da_a: "+o.getDa_a()+" idM: "+o.getIdM());
+			for(ComposizioneBean c:o.getListaProdotti()){
+				System.out.println(c.getProdotto().getId()+" "+c.getQuantita());
+			}
+		}
+		String insertCar="insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values (?,?,1,?,?);";
+		String insertScar="insert into operazioniInSospeso(idM,tipo,stato,data,da_a) values (?,?,1,?,?)";
+		String insertComps="insert into composizioneOpSosp values(?,?,?);";
+		String del="delete from operazioniInSospeso where idOperazione=?;";
+		Connection connection=null;
+		int idOpSc=getUltimaOpSosp();
+		int idOpC=idOpSc;
+		try{
+			connection=DriverManagerConnectionPool.getConnection();
+			PreparedStatement ps=connection.prepareStatement(del);
+			ps.setString(1, oldOp);
+			ps.executeUpdate();
+			connection.commit();
+			for(OperazioneSospesaBean o:ops){
+				PreparedStatement psICar=connection.prepareStatement(insertCar);
+				PreparedStatement psIScar=connection.prepareStatement(insertScar);
+				
+				psIScar.setString(1, o.getIdM());
+				psIScar.setString(2, "Scarico");
+				psIScar.setDate(3, o.getData());
+				psIScar.setString(4,o.getDa_a());
+				psIScar.executeUpdate();
+				connection.commit();
+				idOpSc=idOpC+1;
+				
+				System.out.println(idOpSc);
+				psIScar.close();
+				
+				
+				psICar.setString(1, o.getDa_a());
+				psICar.setString(2, "Carico");
+				psICar.setDate(3, o.getData());
+				psICar.setString(4, o.getIdM());
+				psICar.executeUpdate();
+				connection.commit();
+				idOpC=idOpSc+1;
+				
+				System.out.println(idOpC);
+				psICar.close();
+				
+				
+				for(ComposizioneBean c:o.getListaProdotti()){
+					PreparedStatement psIComps=connection.prepareStatement(insertComps);
+					psIComps.setInt(1, idOpSc);
+					psIComps.setString(2, c.getProdotto().getId());
+					psIComps.setFloat(3, c.getQuantita());
+					psIComps.executeUpdate();
+					psIComps.close();
+				}
+				
+				
+				for(ComposizioneBean c:o.getListaProdotti()){
+					PreparedStatement psIComps=connection.prepareStatement(insertComps);
+					psIComps.setInt(1, idOpC);
+					psIComps.setString(2, c.getProdotto().getId());
+					psIComps.setFloat(3, c.getQuantita());
+					psIComps.executeUpdate();
+					psIComps.close();
+				}
+								
+			
+				connection.commit();
+			}
+		}
+		catch(SQLException e){
+			System.out.println("SQLError: "+e.getMessage());
+			return false;
+		}
+		finally{
+			try{
+			
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+			catch(SQLException e){
+				System.out.println("SQLError: "+e.getMessage());
+			}
+		}		
+		
+		return true;
+	
+	}
+
 
 
 
