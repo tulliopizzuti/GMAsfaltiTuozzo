@@ -60,3 +60,7 @@ div#dynamiccontent thead tr {
 th {
     width: 10%;
 }
+
+caption {
+    font-size: 25px;
+}
