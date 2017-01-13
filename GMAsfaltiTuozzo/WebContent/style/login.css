@@ -1,1 +1,40 @@
 @CHARSET "ISO-8859-1";
+div.login_form {
+    padding-top: 50px;
+    padding-bottom:50px;
+    margin-right:50px;
+    margin-left: 50px;
+}
+
+form {
+    text-align: center;
+    border: 3px solid #f1f1f1;
+}
+
+input[type=text], input[type=password] {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+div#form_button input {
+  background-color: #005daa;
+    border: none;
+    color: white; 
+    padding: 15px 32px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+@media (min-width:321px) and (max-width:767px) {
+
+}
+@media (min-width:768px) and (max-width:1096px) {
+
+}
