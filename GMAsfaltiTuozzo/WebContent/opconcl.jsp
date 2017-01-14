@@ -36,9 +36,12 @@ it.asfalti.javabean.OperazioneCompletataBean,it.asfalti.javabean.ComposizioneBea
 			</ul>		
 		</nav>
 		<div id="dynamiccontent">
+			
 			<%if(op!=null && op.size()>0){ %>
 				<h2>Operazioni concluse magazzino</h2>
 				<%for(OperazioneCompletataBean operation:op){ %>
+				
+				<div id="tabsix">
 					<table>
 						<tr> 
 							<th>Codice Operazione </th>
@@ -53,11 +56,15 @@ it.asfalti.javabean.OperazioneCompletataBean,it.asfalti.javabean.ComposizioneBea
 							<td><%=operation.getDa_a() %> </td>
 						</tr>
 					</table>
+					</div>
 					<% ArrayList<ComposizioneBean> comp=operation.getListaProdotti();
 					if( comp!=null ) 
 						for(ComposizioneBean c:comp){
 						%>
-						<table>
+					
+					
+					<div id="tabdex">	
+					<table>
 							<tr> 
 								<th>Codice Prodotto </th>
 								<th>Descrizione </th>
@@ -72,6 +79,7 @@ it.asfalti.javabean.OperazioneCompletataBean,it.asfalti.javabean.ComposizioneBea
 								<td><%=p.getMisura()%> </td>
 							</tr>
 						</table>
+						</div>
 						<%} %>
 					<%} %>
 			<%} else { %>
