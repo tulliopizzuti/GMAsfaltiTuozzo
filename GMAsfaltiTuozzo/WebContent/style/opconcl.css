@@ -29,6 +29,9 @@ div#dynamiccontent {
     border: 3px solid #f1f1f1;
     padding-left: 10px;
     height: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
     
 }
 

@@ -43,6 +43,7 @@
 						<th>Descrizione </th>
 						<th>Quantità </th>
 						<th>Unità di misura </th>
+						<th>Seleziona</th>
 					</tr>
 					<%for(DisponibilitaBean d:disp){ %>
 					

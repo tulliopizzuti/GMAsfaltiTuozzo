@@ -42,6 +42,7 @@ it.asfalti.javabean.ProdottoBean" %>
 						<th>IdProdotto </th>
 						<th>Descrizione </th>
 						<th>Unità di misura </th>
+						<th>Seleziona</th>
 					</tr>
 					<%for(ProdottoBean d:prods){ %>
 						<tr>
