@@ -27,6 +27,9 @@ div#dynamiccontent {
     text-align: left;
     border: 3px solid #f1f1f1;
     padding-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
 }
 
 nav#navbar {
@@ -45,4 +48,11 @@ table, td, th {
 
 caption {
     font-size: 25px;
+}
+
+th {
+    color: #4D4D4D;
+    font-weight: bold;
+    background-color: #F7F7F7;
+    border-bottom: 1px solid #DDD;
 }

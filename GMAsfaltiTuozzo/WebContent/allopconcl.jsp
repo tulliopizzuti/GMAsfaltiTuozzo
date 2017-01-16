@@ -51,15 +51,17 @@ java.util.ArrayList,it.asfalti.javabean.OperazioneCompletataBean" %>
 					<%} %>
 				</select>
 				<div id="magOp" style="visibility:hidden;">
+				
 					<table class="infOpTable">
-						<caption>Disponibilità prodotti del magazzino</caption>
 							<tr id="tHeader"> 
 								<th>Codice Operazione </th>
 								<th>Data/Ora </th>
 								<th>Tipo </th>
 								<th>Mittente/Destinazione </th>
+								<th>
 							</tr>							
 					</table>
+					
 					<table class="compOpTable">
 							<tr> 
 								<th>Codice Prodotto </th>
@@ -69,6 +71,7 @@ java.util.ArrayList,it.asfalti.javabean.OperazioneCompletataBean" %>
 							</tr>
 							
 					</table>
+					
 				</div>				
 			<%} else { %>
 				<div id="nulldisp">

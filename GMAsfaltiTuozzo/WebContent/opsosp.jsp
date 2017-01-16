@@ -40,6 +40,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 			<%if(op!=null && op.size()>0){ %>
 				<h2>Operazioni sospese magazzino</h2>
 				<%for(OperazioneSospesaBean operation:op){ %>
+		<div id="tabsix">
 			<table>
      				 <thead>
 						<tr> 
@@ -66,10 +67,12 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 						</tr>
 					 </tbody>
 					</table>
+		</div>			
 					<% ArrayList<ComposizioneBean> comp=operation.getListaProdotti();
 					if( comp!=null ) 
 						for(ComposizioneBean c:comp){
 						%>
+		<div id="tabdex">
 						<table>
 							<tr> 
 								<th>Codice Prodotto </th>
@@ -85,6 +88,7 @@ it.asfalti.javabean.OperazioneSospesaBean,it.asfalti.javabean.ComposizioneBean
 								<td><%=p.getMisura()%> </td>
 							</tr>
 						</table>
+		</div>
 						<%} %>
 					<%} %>
 			<%} else { %>

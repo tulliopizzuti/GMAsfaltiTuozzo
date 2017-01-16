@@ -1,6 +1,5 @@
 @CHARSET "ISO-8859-1";
 ul {
-   
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -10,6 +9,7 @@ ul {
     left: 1em;
 }
 
+
 li a {
     display: block;
     color: white;
@@ -17,19 +17,9 @@ li a {
     text-decoration: none;
 }
 
-/* Change the link color on hover */
 li a:hover {
     background-color: #555;
     color: white;
-}
-div#dynamiccontent {
-    margin-left: 210px;
-    /*! text-align: left; */
-    border: 3px solid #f1f1f1;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    padding-right: 10px;
 }
 
 nav#navbar {
@@ -38,8 +28,21 @@ nav#navbar {
   padding-left: 1em;
 }
 
-div#dynamiccontent table{
-	text-align: center;
+div#dynamiccontent {
+    margin-left: 210px;
+    width: auto;
+    float: left;
+    text-align: center;
+    border: 3px solid #f1f1f1;
+    padding-left: 10px;
+    height: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+table {
+    text-align: center;
     width: 100%;
     margin-bottom: 5px;
     border-collapse: collapse;
@@ -48,22 +51,30 @@ div#dynamiccontent table{
     border-right: 1px solid #DDD;
     border-bottom: 1px solid #DDD;
 }
-
-div#dynamiccontent thead td {
+div#tabsix table thead {
     color: #4D4D4D;
     font-weight: bold;
     background-color: #F7F7F7;
     border-bottom: 1px solid #DDD;
 }
-div#dynamiccontent thead tr {
-    color: #000000;
-    border-right: 1px solid #DDD;
+
+div#tabdex table th {
+    color: #4D4D4D;
+    font-weight: bold;
+    background-color: #F7F7F7;
+    border-bottom: 1px solid #DDD;
 }
 
-th {
-    width: 10%;
+div#dynamiccontent #tabsix {
+    float: left;
+    width:60%;
+    clear: both;
+    padding-bottom: 10px;
 }
 
-caption {
-    font-size: 25px;
+div#dynamiccontent #tabdex {
+    float: right;
+    height: auto;
+    width: 40%;
+    padding-bottom: 10px;
 }
