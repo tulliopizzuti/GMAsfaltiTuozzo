@@ -1,0 +1,71 @@
+@CHARSET "ISO-8859-1";
+ul {
+   
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #005daa;
+    position: absolute;
+    left: 1em;
+}
+
+li a {
+    display: block;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+div#dynamiccontent {
+    margin-left: 210px;
+    text-align: left;
+    border: 3px solid #f1f1f1;
+    padding-left: 10px;
+    height: auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    
+}
+
+nav#navbar {
+  color: white;
+  background-color: #555;
+  padding-left: 1em;
+}
+
+th {
+    color: #4D4D4D;
+    font-weight: bold;
+    background-color: #F7F7F7;
+    border-bottom: 1px solid #DDD;
+}
+table.opLine {
+    margin-top: 30px;
+    margin-bottom: 1px;
+}
+
+table.opComp {
+    width: 100%;
+    margin-top:1px;
+    margin-bottom: 5px;
+    border-collapse: collapse;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+table.opLine {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    border-top: 1px solid #DDD;
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+}
