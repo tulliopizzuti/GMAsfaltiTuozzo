@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+org.eclipse.jdt.core.userLibrary.JOGL=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<userlibrary systemlibrary\="false" version\="2">\r\n\t<archive path\="C\:/Users/tulli/Downloads/jogamp-all-platforms/jogamp-all-platforms/jar/gluegen-rt.jar"/>\r\n\t<archive path\="C\:/Users/tulli/Downloads/jogamp-all-platforms/jogamp-all-platforms/jar/jogl-all.jar">\r\n\t\t<attributes>\r\n\t\t\t<attribute name\="javadoc_location" value\="http\://jogamp.org/deployment/jogamp-next/javadoc/jogl/javadoc/"/>\r\n\t\t</attributes>\r\n\t</archive>\r\n</userlibrary>\r\n

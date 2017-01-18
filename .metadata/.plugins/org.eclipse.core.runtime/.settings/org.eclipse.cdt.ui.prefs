@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+semanticHighlighting.class.bold=false
+semanticHighlighting.enum.color=100,70,50
+semanticHighlighting.enum.enabled=false
+semanticHighlighting.enum.italic=false
+semanticHighlighting.macroDefinition.bold=false
+semanticHighlighting.typedef.bold=false

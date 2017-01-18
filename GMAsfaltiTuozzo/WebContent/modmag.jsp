@@ -43,7 +43,7 @@
 		</nav>
 		<div id="dynamiccontent">
 			<div id="prods">
-				<p id="pName" class="pInput">Nome prodotto:</p>
+				<p id="pName" class="pInput">Nome magazzino:</p>
 				<select id="prodName" onchange="set(this)">
 					<option value=""></option>
 					<%for(MagazzinoBean p:mags){ %>

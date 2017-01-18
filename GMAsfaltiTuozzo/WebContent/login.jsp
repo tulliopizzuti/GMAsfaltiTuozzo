@@ -35,6 +35,7 @@
 						<p id="error"><%=error	%></p>
 					</div>
 				<%} %>
+				<%session.removeAttribute("error"); %>
 			</form>	
 		</div>	
 	</div>
