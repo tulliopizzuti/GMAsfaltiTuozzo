@@ -13,7 +13,7 @@ import it.asfalti.db.DBInformation;
 import it.asfalti.db.GetInformation;
 
 /**
- * Servlet implementation class CreaProdotto
+ * Crea un nuovo prodotto, i dati sono inviati alla servlet da javascript sotto forma di JSON object
  */
 @WebServlet("/creaProdotto")
 public class CreaProdotto extends HttpServlet {

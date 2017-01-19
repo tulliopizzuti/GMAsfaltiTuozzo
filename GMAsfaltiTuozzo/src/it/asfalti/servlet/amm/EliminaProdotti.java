@@ -12,7 +12,7 @@ import it.asfalti.db.DBInformation;
 import it.asfalti.db.GetInformation;
 
 /**
- * Servlet implementation class EliminaProdotti
+ * La servlet riceve un oggetto json contenente gli id dei prodotti da cancellare.
  */
 @WebServlet("/eliminaProdotti")
 public class EliminaProdotti extends HttpServlet {

@@ -11,7 +11,7 @@ import it.asfalti.db.DBInformation;
 import it.asfalti.db.GetInformation;
 
 /**
- * Servlet implementation class GetProds
+ * Preleva i prodotti disponibili per il carico e li registra sulla richiesta in modo da poter costruire la pagina
  */
 @WebServlet("/getProds")
 public class GetProds extends HttpServlet {

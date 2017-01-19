@@ -11,7 +11,7 @@ import it.asfalti.db.DBInformation;
 import it.asfalti.db.GetInformation;
 
 /**
- * Servlet implementation class SpedisciMerce
+ * Registra l'invio della merce ad un altro magazzino.
  */
 @WebServlet("/spedisciMerce")
 public class SpedisciMerce extends HttpServlet {

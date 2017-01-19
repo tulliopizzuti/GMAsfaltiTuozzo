@@ -13,7 +13,7 @@ import it.asfalti.db.GetInformation;
 import it.asfalti.javabean.OperazioneCompletataBean;
 
 /**
- * Servlet implementation class GetDisp
+ * Preleva le operazioni concluse di un magazzino e le registra sulla richiesta in modo da poter costruire la pagina
  */
 @WebServlet("/getOpConcl")
 public class GetOpConcl extends HttpServlet {

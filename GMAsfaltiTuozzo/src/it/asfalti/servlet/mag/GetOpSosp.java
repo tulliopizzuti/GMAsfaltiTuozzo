@@ -14,7 +14,7 @@ import it.asfalti.db.GetInformation;
 import it.asfalti.javabean.OperazioneSospesaBean;
 
 /**
- * Servlet implementation class GetOpSosp
+ * Preleva le operazioni sospesa di un magazzino e le registra sulla richiesta in modo da poter costruire la pagina
  */
 @WebServlet("/getOpSosp")
 public class GetOpSosp extends HttpServlet {

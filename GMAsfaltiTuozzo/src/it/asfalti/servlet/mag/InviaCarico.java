@@ -20,7 +20,7 @@ import it.asfalti.javabean.OperazioneSospesaBean;
 import it.asfalti.javabean.ProdottoBean;
 
 /**
- * Servlet implementation class InviaCarico
+ * Invia un oridne di carico all'amministratore. I dati vengono inviati tramite javascript dalla pagina e registrati in un oggetto JSON
  */
 @WebServlet("/inviaCarico")
 public class InviaCarico extends HttpServlet {

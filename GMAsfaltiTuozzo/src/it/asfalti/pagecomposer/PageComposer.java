@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import it.asfalti.javabean.MagazzinoBean;
 
 /**
- * Servlet implementation class PageComposer
+ * Servlet principale utilizzata per costruire le pagine jsp
  */
 @WebServlet("/pagecomposer")
 public class PageComposer extends HttpServlet {
@@ -82,13 +82,6 @@ public class PageComposer extends HttpServlet {
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
 		getServletContext().getRequestDispatcher("/"+page+".jsp").forward(request, response);
 	}
 

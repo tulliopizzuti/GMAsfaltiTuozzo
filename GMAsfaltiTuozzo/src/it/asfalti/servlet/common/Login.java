@@ -12,7 +12,7 @@ import it.asfalti.db.GetInformation;
 import it.asfalti.javabean.MagazzinoBean;
 
 /**
- * Servlet implementation class Login
+ * Servlet che gestisce il login per tutti i tipi di utente
  */
 @WebServlet("/login")
 public class Login extends HttpServlet {

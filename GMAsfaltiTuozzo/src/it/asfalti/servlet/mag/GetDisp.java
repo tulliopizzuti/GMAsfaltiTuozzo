@@ -13,7 +13,7 @@ import it.asfalti.db.GetInformation;
 import it.asfalti.javabean.DisponibilitaBean;
 
 /**
- * Servlet implementation class GetDisp
+ * Preleva le disponibilità di un magazzino e le registra sulla richiesta in modo da poter costruire la pagina
  */
 @WebServlet("/getdisp")
 public class GetDisp extends HttpServlet {

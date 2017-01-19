@@ -14,7 +14,7 @@ import it.asfalti.db.GetInformation;
 import it.asfalti.javabean.OperazioneSospesaBean;
 
 /**
- * Servlet implementation class GetOrdScarico
+ * Preleva gli ordini di scarico di un magazzino e le registra sulla richiesta in modo da poter costruire la pagina
  */
 @WebServlet("/getOrdScarico")
 public class GetOrdScarico extends HttpServlet {

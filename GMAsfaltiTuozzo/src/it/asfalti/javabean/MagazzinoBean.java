@@ -1,5 +1,9 @@
 package it.asfalti.javabean;
-
+/**
+ * JavaBean che rappresenta un generico magazzino.
+ * Contiene i metodo getter e setter per prelevare le informazione e impostare i campi. 
+ *
+ */
 public class MagazzinoBean {
     private String idM;
     private String descrizione;

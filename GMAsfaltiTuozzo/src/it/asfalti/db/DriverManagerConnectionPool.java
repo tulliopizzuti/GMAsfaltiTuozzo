@@ -18,7 +18,11 @@ public class DriverManagerConnectionPool  {
 			System.out.println("DB driver not found:"+ e.getMessage());
 		} 
 	}
-	
+	/**
+	 * Crea una connessione al database
+	 * @return Una connessione al database
+	 * @throws SQLException
+	 */
 	private static synchronized Connection createDBConnection() throws SQLException {
 		Connection newConnection = null;
 		String ip = "localhost";
@@ -32,8 +36,12 @@ public class DriverManagerConnectionPool  {
 		newConnection.setAutoCommit(false);
 		return newConnection;
 	}
-
-
+	
+	/**
+	 * Viene usato per istanziare una nuova connessione al database
+	 * @return Una connessione al database
+	 * @throws SQLException
+	 */
 	public static synchronized Connection getConnection() throws SQLException {
 		Connection connection;
 
@@ -54,7 +62,11 @@ public class DriverManagerConnectionPool  {
 
 		return connection;
 	}
-
+	/**
+	 * Chiude la connessione al database
+	 * @param connection Una connessione attiva
+	 * @throws SQLException
+	 */
 	public static synchronized void releaseConnection(Connection connection) throws SQLException {
 		if(connection != null) freeDbConnections.add(connection);
 	}

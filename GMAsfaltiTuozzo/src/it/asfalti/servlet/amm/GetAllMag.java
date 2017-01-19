@@ -11,7 +11,7 @@ import it.asfalti.db.DBInformation;
 import it.asfalti.db.GetInformation;
 
 /**
- * Servlet implementation class GetAllMag
+ * Preleva tutti i magazzini dal database e li registra sulla richiesta in modo da poter costruire la pagina jsp che li richiede
  */
 @WebServlet("/getAllMag")
 public class GetAllMag extends HttpServlet {

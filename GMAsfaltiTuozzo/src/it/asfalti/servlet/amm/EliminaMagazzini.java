@@ -13,7 +13,7 @@ import it.asfalti.db.DBInformation;
 import it.asfalti.db.GetInformation;
 
 /**
- * Servlet implementation class EliminaMagazzini
+ * La servlet riceve un oggetto json contenente gli id dei magazzini da cancellare.
  */
 @WebServlet("/eliminaMagazzini")
 public class EliminaMagazzini extends HttpServlet {

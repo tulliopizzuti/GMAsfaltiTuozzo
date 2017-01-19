@@ -13,7 +13,7 @@ import it.asfalti.db.GetInformation;
 import it.asfalti.javabean.MagazzinoBean;
 
 /**
- * Servlet implementation class RegistraScarico
+ * Registra l'avvenuto arrivo della merce al magazzino
  */
 @WebServlet("/registraCarico")
 public class RegistraCarico extends HttpServlet {

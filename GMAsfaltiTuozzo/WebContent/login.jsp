@@ -2,6 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="it.asfalti.javabean.MagazzinoBean" %>   
+<% 
+response.setHeader("Cache-Control","no-store"); 
+response.setHeader("Pragma","no-cache"); 
+response.setHeader ("Expires", "0"); 
+%>
 <%
 	String error=(String)session.getAttribute("error");
 	MagazzinoBean user=(MagazzinoBean)session.getAttribute("user");

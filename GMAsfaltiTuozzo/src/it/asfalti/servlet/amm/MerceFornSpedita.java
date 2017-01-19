@@ -11,7 +11,7 @@ import it.asfalti.db.DBInformation;
 import it.asfalti.db.GetInformation;
 
 /**
- * Servlet implementation class MerceFornSpedita
+ * Registra la spedizione del fornitore
  */
 @WebServlet("/merceFornSpedita")
 public class MerceFornSpedita extends HttpServlet {

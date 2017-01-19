@@ -20,7 +20,7 @@ import it.asfalti.javabean.OperazioneCompletataBean;
 import it.asfalti.javabean.ProdottoBean;
 
 /**
- * Servlet implementation class ScaricaMerce
+ * Registra uno scarico a clienti. I dati vengono inviati tramite javascript dalla pagina e registrati in un oggetto JSON
  */
 @WebServlet("/scaricaMerce")
 public class ScaricaMerce extends HttpServlet {

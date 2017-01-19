@@ -11,7 +11,7 @@ import it.asfalti.db.DBInformation;
 import it.asfalti.db.GetInformation;
 
 /**
- * Servlet implementation class GetProdsElim
+ * Preleva i prodotti eliminabili dal database e li registra sulla richiesta in modo da poter costruire la pagina jsp che li richiede
  */
 @WebServlet("/getProdsElim")
 public class GetProdsElim extends HttpServlet {

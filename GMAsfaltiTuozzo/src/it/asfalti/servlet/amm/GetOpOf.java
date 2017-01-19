@@ -18,7 +18,7 @@ import it.asfalti.javabean.ComposizioneBean;
 import it.asfalti.javabean.OperazioneCompletataBean;
 
 /**
- * Servlet implementation class GetOpOf
+ * Preleva le operazioni di un magazzino  dal database e le registra sulla richiesta in modo da poter costruire la pagina jsp che li richiede
  */
 @WebServlet("/getOpOf")
 public class GetOpOf extends HttpServlet {

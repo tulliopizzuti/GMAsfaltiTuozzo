@@ -1,7 +1,12 @@
 package it.asfalti.javabean;
 
 import it.asfalti.javabean.ProdottoBean;
-
+/**
+ * 
+ * @author tullio
+ * Un oggetto che rappresenta una composizione in un ordine, ovvero il prodotto e la sua quantità, riferita ad un'operazione.
+ * Contiene i metodo getter e setter per prelevare le informazione e impostare i campi
+ */
 public class ComposizioneBean {
     private String idOperazione;
     private float quantita;

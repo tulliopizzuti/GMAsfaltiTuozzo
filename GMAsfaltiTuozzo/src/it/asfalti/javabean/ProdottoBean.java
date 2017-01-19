@@ -1,5 +1,8 @@
 package it.asfalti.javabean;
-
+/**
+ * JavaBean contenente le informazioni di un prodotto. 
+ * Contiene i metodo getter e setter per prelevare le informazione e impostare i campi
+ */
 public class ProdottoBean {
     private String id;
     private String descrizione;

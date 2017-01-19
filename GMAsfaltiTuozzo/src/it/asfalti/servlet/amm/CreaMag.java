@@ -14,7 +14,7 @@ import it.asfalti.db.GetInformation;
 import it.asfalti.javabean.MagazzinoBean;
 
 /**
- * Servlet implementation class CreaMag
+ * Crea un nuovo magazzino, i dati sono inviati alla servlet da javascript sotto forma di JSON object
  */
 @WebServlet("/creaMag")
 public class CreaMag extends HttpServlet {

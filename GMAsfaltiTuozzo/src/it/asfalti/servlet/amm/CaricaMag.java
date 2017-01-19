@@ -21,7 +21,7 @@ import it.asfalti.javabean.OperazioneSospesaBean;
 import it.asfalti.javabean.ProdottoBean;
 
 /**
- * Servlet implementation class CaricaMag
+ * Registra i vari ordini di scarico ai magazzini scelti dall'amministratore
  */
 @WebServlet("/caricaMag")
 public class CaricaMag extends HttpServlet {

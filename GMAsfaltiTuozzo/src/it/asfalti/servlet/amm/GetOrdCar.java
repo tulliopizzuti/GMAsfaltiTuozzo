@@ -14,7 +14,7 @@ import it.asfalti.db.GetInformation;
 import it.asfalti.javabean.OrdineCaricoBean;
 
 /**
- * Servlet implementation class GetOrdCar
+ * Preleva tutti gli oridni di carico per l'amministratore dal database e li registra sulla richiesta in modo da poter costruire la pagina jsp che li richiede
  */
 @WebServlet("/getOrdCar")
 public class GetOrdCar extends HttpServlet {

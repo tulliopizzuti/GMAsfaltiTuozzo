@@ -13,7 +13,7 @@ import it.asfalti.db.DBInformation;
 import it.asfalti.db.GetInformation;
 
 /**
- * Servlet implementation class UpdateMagP
+ * Riceve un oggetto json contenente i dati da cambiare e richiama la funzione per modificare i dati nel database
  */
 @WebServlet("/updateMagP")
 public class UpdateMagP extends HttpServlet {

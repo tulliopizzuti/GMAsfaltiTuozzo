@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Logout
+ * Servlet che gestisce il logout per tutti i tipi di utente
  */
 @WebServlet("/logout")
 public class Logout extends HttpServlet {

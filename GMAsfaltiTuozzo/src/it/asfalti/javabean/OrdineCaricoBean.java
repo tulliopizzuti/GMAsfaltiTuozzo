@@ -2,6 +2,10 @@ package it.asfalti.javabean;
 
 import java.sql.Date;
 import java.util.ArrayList;
+/**
+ * Simile ad OperazioneCompletataBean, si differenzia nella composizione, in quanto i prodotti possono essere inviati da diversi magazzini
+ * Contiene i metodo getter e setter per prelevare le informazione e impostare i campi
+ */
 
 public class OrdineCaricoBean  {
 	private String idOp;

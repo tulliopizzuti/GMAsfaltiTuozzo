@@ -4,7 +4,10 @@ import it.asfalti.javabean.ComposizioneBean;
 
 import java.sql.Date;
 import java.util.ArrayList;
-
+/**
+ * Rappresenta un'operazione completata nel database, contiene anche la relativa composizione.
+ * Contiene i metodo getter e setter per prelevare le informazione e impostare i campi
+ */
 
 public class OperazioneCompletataBean {
     private String idOp;

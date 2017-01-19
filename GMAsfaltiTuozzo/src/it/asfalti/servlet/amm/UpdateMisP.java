@@ -13,7 +13,7 @@ import it.asfalti.db.DBInformation;
 import it.asfalti.db.GetInformation;
 
 /**
- * Servlet implementation class UpdateMisP
+ * Riceve un oggetto json contenente la misura del prodotto da cambiare e richiama la funzione per modificare i dati nel database
  */
 @WebServlet("/updateMisP")
 public class UpdateMisP extends HttpServlet {
